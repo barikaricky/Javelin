@@ -30,7 +30,9 @@ const ContactForm = () => {
     setStatus({ loading: true, success: false, error: null });
 
     try {
-      const response = await axios.post('/api/contact', formData);
+      // Use full URL for API endpoint
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const response = await axios.post(`${apiUrl}/api/contact`, formData);
       
       if (response.data.success) {
         setStatus({ loading: false, success: true, error: null });

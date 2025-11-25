@@ -49,6 +49,7 @@ export const NAV_LINKS = [
   { name: 'About', path: '/about' },
   { name: 'Services', path: '/services' },
   { name: 'Our Sites', path: '/sites' },
+  { name: 'Gallery', path: '/gallery' },
   { name: 'Recruitment', path: '/recruitment' },
   { name: 'Contact Us', path: '/contact' },
 ];

@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import OurSites from './pages/OurSites';
+import Gallery from './pages/Gallery';
 import Recruitment from './pages/Recruitment';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
@@ -21,6 +22,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/sites" element={<OurSites />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/recruitment" element={<Recruitment />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />

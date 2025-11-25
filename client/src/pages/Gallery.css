@@ -1,0 +1,16 @@
+.gallery-page-hero {
+  background: linear-gradient(135deg, var(--color-primary-blue), var(--color-blue-dark));
+  padding: 5rem 0 3rem;
+  text-align: center;
+  color: var(--color-white);
+}
+
+.gallery-page-hero h1 {
+  color: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+.gallery-page-hero p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
