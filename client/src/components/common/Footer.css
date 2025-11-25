@@ -1,0 +1,11 @@
+.footer {
+  background-color: var(--color-primary-blue);
+  color: var(--color-white);
+  padding: 2rem 0;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 0;
+}
