@@ -1,0 +1,33 @@
+.contact-hero {
+  background: linear-gradient(135deg, var(--color-primary-blue), var(--color-blue-dark));
+  padding: 5rem 0 3rem;
+  text-align: center;
+  color: var(--color-white);
+}
+
+.contact-hero h1 {
+  color: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+.contact-hero p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+.contact-content {
+  padding: 4rem 0;
+}
+
+.contact-grid {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+  }
+}

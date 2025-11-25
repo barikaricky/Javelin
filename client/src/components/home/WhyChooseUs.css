@@ -1,0 +1,69 @@
+.why-choose-us {
+  background: linear-gradient(135deg, var(--color-primary-blue), var(--color-blue-dark));
+  color: var(--color-white);
+}
+
+.section-header--light h2,
+.section-header--light p {
+  color: var(--color-white);
+}
+
+.section-header--light h2::after {
+  background: var(--color-primary-yellow);
+}
+
+.reasons-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+.reason-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid rgba(255, 204, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.reason-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-primary-yellow);
+  transform: translateY(-5px);
+}
+
+.reason-card__icon {
+  font-size: 3.5rem;
+  color: var(--color-primary-yellow);
+  margin-bottom: 1.5rem;
+}
+
+.reason-card__title {
+  font-size: 1.5rem;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.reason-card__description {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+  .reasons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reasons-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}

@@ -1,0 +1,79 @@
+import React from 'react';
+import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaFax } from 'react-icons/fa';
+import './ContactInfo.css';
+
+const ContactInfo = () => {
+  const contactDetails = [
+    {
+      icon: <FaMapMarkerAlt />,
+      title: 'Head Office',
+      content: '123 Security Boulevard, Victoria Island, Lagos, Nigeria',
+      link: null
+    },
+    {
+      icon: <FaPhone />,
+      title: 'Phone Numbers',
+      content: '+234 801 234 5678\n+234 802 345 6789',
+      link: 'tel:+2348012345678'
+    },
+    {
+      icon: <FaEnvelope />,
+      title: 'Email Address',
+      content: 'info@javelinassociates.com\nhr@javelinassociates.com',
+      link: 'mailto:info@javelinassociates.com'
+    },
+    {
+      icon: <FaFax />,
+      title: 'Fax',
+      content: '+234 1 234 5678',
+      link: null
+    },
+    {
+      icon: <FaClock />,
+      title: 'Office Hours',
+      content: 'Monday - Friday: 8:00 AM - 6:00 PM\nSaturday: 9:00 AM - 2:00 PM\nSunday: Closed',
+      link: null
+    }
+  ];
+
+  return (
+    <div className="contact-info">
+      <h2>Get In Touch</h2>
+      <p className="contact-info__subtitle">
+        We're here to answer any questions you may have about our security services.
+      </p>
+
+      <div className="contact-info__items">
+        {contactDetails.map((detail, index) => (
+          <div key={index} className="contact-info__item">
+            <div className="contact-info__icon">{detail.icon}</div>
+            <div className="contact-info__content">
+              <h3>{detail.title}</h3>
+              {detail.link ? (
+                <a href={detail.link} className="contact-info__link">
+                  {detail.content.split('\n').map((line, i) => (
+                    <span key={i}>{line}<br /></span>
+                  ))}
+                </a>
+              ) : (
+                <p>
+                  {detail.content.split('\n').map((line, i) => (
+                    <span key={i}>{line}<br /></span>
+                  ))}
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="contact-info__cta">
+        <div className="badge badge-yellow">
+          24/7 Emergency Response Available
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ContactInfo;
