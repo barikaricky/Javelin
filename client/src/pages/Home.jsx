@@ -3,6 +3,7 @@ import HeroSlider from '../components/home/HeroSlider';
 import AnnouncementSection from '../components/home/AnnouncementSection';
 import AboutSection from '../components/home/AboutSection';
 import ServicesSection from '../components/home/ServicesSection';
+import TeamSection from '../components/home/TeamSection';
 import SitesSection from '../components/home/SitesSection';
 import WhyChooseUs from '../components/home/WhyChooseUs';
 import GallerySection from '../components/home/GallerySection';
@@ -15,6 +16,7 @@ const Home = () => {
       <AnnouncementSection />
       <AboutSection />
       <ServicesSection />
+      <TeamSection />
       <SitesSection />
       <WhyChooseUs />
       <GallerySection />

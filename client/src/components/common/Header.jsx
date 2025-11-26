@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes, FaPhone, FaEnvelope } from 'react-icons/fa';
 import { NAV_LINKS } from '../../utils/constants';
+import { LOGO } from '../../utils/imageHelper';
 import './Header.css';
 
 const Header = () => {
@@ -56,10 +57,21 @@ const Header = () => {
           <div className="header__nav-content">
             {/* Logo */}
             <Link to="/" className="header__logo" onClick={closeMenu}>
-              <div className="header__logo-icon">J</div>
-              <div className="header__logo-text">
-                <span className="header__logo-main">JAVELIN</span>
-                <span className="header__logo-sub">ASSOCIATES LTD</span>
+              <img
+                src={LOGO}
+                alt="Javelin Associates"
+                className="header__logo-img"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+              <div className="header__logo-fallback">
+                <div className="header__logo-icon">J</div>
+                <div className="header__logo-text">
+                  <span className="header__logo-main">JAVELIN</span>
+                  <span className="header__logo-sub">ASSOCIATES LTD</span>
+                </div>
               </div>
             </Link>
 

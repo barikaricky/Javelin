@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PageLoader from './components/common/PageLoader';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+import CookieConsent from './components/common/CookieConsent';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -14,6 +16,7 @@ import NotFound from './pages/NotFound';
 function App() {
   return (
     <Router>
+      <PageLoader />
       <div className="App">
         <Header />
         <main>
@@ -29,6 +32,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <CookieConsent />
       </div>
     </Router>
   );
