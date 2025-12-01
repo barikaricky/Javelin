@@ -13,7 +13,7 @@ const ContactInfo = () => {
     {
       icon: <FaPhone />,
       title: 'Phone Numbers',
-      content: '+234 801 234 5678\n+234 802 345 6789',
+      content: '+2348134233131\n+234 802 345 6789',
       link: 'tel:+2348012345678'
     },
     {
