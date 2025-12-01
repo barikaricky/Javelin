@@ -56,33 +56,94 @@ vercel --prod
 
 ---
 
-## SEO Checklist ✅
+## 🇳🇬 Nigeria SEO Checklist (CRITICAL FOR TOP 5 RANKING) ✅
 
-After deployment, complete these steps:
-
-### 1. Google Search Console
+### 1. Google Search Console (DO THIS FIRST!)
 - Go to [Google Search Console](https://search.google.com/search-console)
 - Add property: `https://www.javelinassociates.org`
 - Verify ownership (DNS or HTML file)
 - Submit sitemap: `https://www.javelinassociates.org/sitemap.xml`
+- Set target country to **Nigeria** in Settings > International Targeting
 
-### 2. Google My Business
+### 2. Google Business Profile (ESSENTIAL!)
 - Go to [Google Business Profile](https://business.google.com)
-- Create listing for "Javelin Associates Security Services"
-- Add address, phone, photos, services
-- Get reviews from clients
+- Create listing: **"Javelin Associates Security Services"**
+- **Categories to select:**
+  - Primary: Security Guard Service
+  - Secondary: Security Service, Private Investigator, Bodyguard Service
+- Add complete information:
+  - ✅ Full Lagos/Abuja address
+  - ✅ Nigerian phone number (+234...)
+  - ✅ Business hours (24/7)
+  - ✅ Photos of team, vehicles, equipment
+  - ✅ All services listed
+  - ✅ Service areas: Lagos, Abuja, Port Harcourt, nationwide
+- **Get reviews from existing clients** (aim for 20+ reviews)
 
-### 3. Bing Webmaster Tools
+### 3. Nigeria Business Directories (High Priority)
+Register on these Nigerian directories:
+
+| Directory | URL | Priority |
+|-----------|-----|----------|
+| Nigeria Yellow Pages | https://www.nigeriayellowpages.com | ⭐⭐⭐ |
+| VConnect Nigeria | https://www.vconnect.com | ⭐⭐⭐ |
+| BusinessList Nigeria | https://www.businesslist.com.ng | ⭐⭐⭐ |
+| Finelib Nigeria | https://www.finelib.com | ⭐⭐ |
+| Nigeria Business Directory | https://www.nigeriabusinessdirectory.com | ⭐⭐ |
+| Infoisinfo Nigeria | https://www.infoisinfo.com.ng | ⭐⭐ |
+
+### 4. Bing & Yahoo
 - Go to [Bing Webmaster Tools](https://www.bing.com/webmasters)
 - Add your site
 - Submit sitemap
 
-### 4. Social Media Profiles
-Create consistent profiles on:
-- Facebook Business Page
-- LinkedIn Company Page
-- Instagram Business
-- Twitter/X
+### 5. Create Location-Specific Pages
+Create separate pages targeting these keywords:
+- `/security-company-lagos` - "Security Company in Lagos"
+- `/security-services-abuja` - "Security Services Abuja"
+- `/security-guards-port-harcourt` - "Security Guards Port Harcourt"
+- `/vip-protection-nigeria` - "VIP Protection Nigeria"
+
+### 6. Content Marketing for Nigeria
+Create blog posts targeting Nigerian searches:
+- "Top 10 Security Tips for Businesses in Lagos"
+- "How to Choose a Security Company in Nigeria"
+- "VIP Protection Services in Abuja: What to Expect"
+- "Event Security Checklist for Nigerian Events"
+- "Corporate Security Best Practices in Nigeria"
+
+### 7. Social Media (Nigerian Audience)
+Create profiles with consistent NAP (Name, Address, Phone):
+
+| Platform | Action |
+|----------|--------|
+| Facebook | Create Business Page, join Nigerian business groups |
+| LinkedIn | Company page, connect with Nigerian businesses |
+| Instagram | Showcase team, security operations |
+| Twitter/X | Industry news, security tips |
+
+### 8. Nigerian Backlinks (Important!)
+Get listed/mentioned on:
+- Nigerian news sites (The Guardian Nigeria, Punch, Vanguard)
+- Nigerian business blogs
+- Security industry publications
+- Chamber of Commerce listings
+
+---
+
+## Target Keywords (Already Optimized)
+
+Your site is now optimized for:
+- "security company Nigeria" 
+- "security services Lagos"
+- "security guards Abuja"
+- "VIP protection Nigeria"
+- "private security company Nigeria"
+- "armed guards Nigeria"
+- "corporate security Lagos"
+- "event security Nigeria"
+- "bodyguards Nigeria"
+- "executive protection Lagos"
 
 ---
 
@@ -107,6 +168,33 @@ Your site will be accessible via HTTPS.
 Set up free uptime monitoring:
 - [UptimeRobot](https://uptimerobot.com) - Free
 - [Better Uptime](https://betteruptime.com) - Free tier
+
+---
+
+## 📊 Track Your Rankings
+
+Use these free tools to monitor your Nigeria rankings:
+- [Google Search Console](https://search.google.com/search-console) - See search queries
+- [Ubersuggest](https://neilpatel.com/ubersuggest/) - Track keyword rankings
+- [Google Alerts](https://www.google.com/alerts) - Monitor brand mentions
+
+---
+
+## Expected Timeline to Top 5
+
+| Milestone | Timeline |
+|-----------|----------|
+| Indexed by Google | 1-2 weeks |
+| Appearing in search results | 2-4 weeks |
+| Top 20 for local keywords | 1-2 months |
+| Top 10 for "security company Lagos" | 2-3 months |
+| Top 5 for Nigerian security searches | 3-6 months |
+
+**Speed up ranking by:**
+- Getting 20+ Google reviews
+- Regular blog content
+- Backlinks from Nigerian sites
+- Active social media
 
 ---
 
