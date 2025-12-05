@@ -9,6 +9,7 @@ const BonusBenefit = require('../models/BonusBenefit');
 const TeamMember = require('../models/TeamMember');
 const Guard = require('../models/Guard');
 const GalleryImage = require('../models/GalleryImage');
+const Site = require('../models/Site');
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/javelin-security';
 
@@ -26,6 +27,7 @@ const seedData = async () => {
     await TeamMember.deleteMany({});
     await Guard.deleteMany({});
     await GalleryImage.deleteMany({});
+    await Site.deleteMany({});
 
     // Create Head Poster user
     console.log('👤 Creating Head Poster user...');
@@ -257,6 +259,67 @@ const seedData = async () => {
       }
     ]);
     console.log(`   ✅ Created ${gallery.length} gallery images`);
+
+    // Create sample sites
+    console.log('🏢 Creating sample sites...');
+    const sites = await Site.insertMany([
+      {
+        name: 'Corporate Plaza Lagos',
+        location: 'Victoria Island, Lagos',
+        type: 'Corporate',
+        guards: 12,
+        hasSupervisor: true,
+        description: 'Premier corporate security for high-rise office complex',
+        isActive: true,
+        displayOrder: 1,
+        postedBy: headPoster._id
+      },
+      {
+        name: 'Residential Estate Abuja',
+        location: 'Maitama, Abuja',
+        type: 'Residential',
+        guards: 8,
+        hasSupervisor: true,
+        description: 'Gated community with 24/7 security patrol',
+        isActive: true,
+        displayOrder: 2,
+        postedBy: headPoster._id
+      },
+      {
+        name: 'Industrial Complex PH',
+        location: 'Port Harcourt',
+        type: 'Industrial',
+        guards: 15,
+        hasSupervisor: true,
+        description: 'Manufacturing facility with perimeter security',
+        isActive: true,
+        displayOrder: 3,
+        postedBy: headPoster._id
+      },
+      {
+        name: 'Shopping Mall Ibadan',
+        location: 'Bodija, Ibadan',
+        type: 'Commercial',
+        guards: 10,
+        hasSupervisor: true,
+        description: 'Retail complex with crowd management',
+        isActive: true,
+        displayOrder: 4,
+        postedBy: headPoster._id
+      },
+      {
+        name: 'Government Office Kano',
+        location: 'Nassarawa GRA, Kano',
+        type: 'Government',
+        guards: 20,
+        hasSupervisor: true,
+        description: 'Government building with access control systems',
+        isActive: true,
+        displayOrder: 5,
+        postedBy: headPoster._id
+      }
+    ]);
+    console.log(`   ✅ Created ${sites.length} sites`);
 
     console.log('\n🎉 Database seeded successfully!');
     console.log('\n📋 Login Credentials:');

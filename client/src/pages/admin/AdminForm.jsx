@@ -135,6 +135,28 @@ const AdminForm = ({ type }) => {
         { name: 'isPublished', label: 'Published', type: 'checkbox' }
       ],
       defaultValues: { category: 'general', isPublished: true, displayOrder: 0 }
+    },
+    sites: {
+      title: id ? 'Edit Site' : 'Add New Site',
+      fields: [
+        { name: 'name', label: 'Site Name', type: 'text', required: true },
+        { name: 'location', label: 'Location', type: 'text', required: true },
+        { name: 'type', label: 'Type', type: 'select', required: true, options: [
+          { value: 'Corporate', label: 'Corporate' },
+          { value: 'Residential', label: 'Residential' },
+          { value: 'Industrial', label: 'Industrial' },
+          { value: 'Commercial', label: 'Commercial' },
+          { value: 'Government', label: 'Government' },
+          { value: 'Event', label: 'Event' }
+        ]},
+        { name: 'guards', label: 'Number of Guards', type: 'number', required: true },
+        { name: 'hasSupervisor', label: 'Has Supervisor', type: 'checkbox' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        { name: 'image', label: 'Site Image', type: 'file' },
+        { name: 'displayOrder', label: 'Display Order', type: 'number' },
+        { name: 'isActive', label: 'Active', type: 'checkbox' }
+      ],
+      defaultValues: { type: 'Corporate', guards: 0, hasSupervisor: true, isActive: true, displayOrder: 0 }
     }
   };
 
@@ -171,6 +193,9 @@ const AdminForm = ({ type }) => {
           break;
         case 'gallery':
           result = await api.getGalleryImage(id);
+          break;
+        case 'sites':
+          result = await api.getSite(id);
           break;
         default:
           return;
@@ -278,6 +303,11 @@ const AdminForm = ({ type }) => {
           result = id 
             ? await api.updateGalleryImage(id, dataToSend)
             : await api.createGalleryImage(dataToSend);
+          break;
+        case 'sites':
+          result = id 
+            ? await api.updateSite(id, dataToSend)
+            : await api.createSite(dataToSend);
           break;
         default:
           return;

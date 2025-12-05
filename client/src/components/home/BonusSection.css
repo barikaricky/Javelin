@@ -1,0 +1,171 @@
+.bonus-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+}
+
+.bonus-section .section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.bonus-section .section-header h2 {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.bonus-section .section-header p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bonus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.bonus-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bonus-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.bonus-card__header {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+.bonus-card.type-discount .bonus-card__header {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+}
+
+.bonus-card.type-bonus .bonus-card__header {
+  background: linear-gradient(135deg, var(--secondary-color), #d4a500);
+}
+
+.bonus-card.type-benefit .bonus-card__header {
+  background: linear-gradient(135deg, #17a2b8, #117a8b);
+}
+
+.bonus-card__icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bonus-card__icon svg {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.bonus-card__value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.bonus-card__content {
+  padding: 25px;
+}
+
+.bonus-card__type {
+  display: inline-block;
+  background: var(--primary-color);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.bonus-card.type-discount .bonus-card__type {
+  background: #28a745;
+}
+
+.bonus-card.type-bonus .bonus-card__type {
+  background: var(--secondary-color);
+  color: var(--primary-dark);
+}
+
+.bonus-card.type-benefit .bonus-card__type {
+  background: #17a2b8;
+}
+
+.bonus-card__title {
+  font-size: 1.25rem;
+  color: #000000;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.bonus-card__description {
+  color: #333333;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.bonus-card__terms {
+  font-size: 0.8rem;
+  color: #999;
+  font-style: italic;
+}
+
+.bonus-card__footer {
+  padding: 15px 25px;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+}
+
+.bonus-card__audience {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.bonus-card__audience svg {
+  font-size: 1rem;
+}
+
+.bonus-card__validity {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .bonus-section {
+    padding: 60px 0;
+  }
+
+  .bonus-section .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .bonus-grid {
+    grid-template-columns: 1fr;
+  }
+}

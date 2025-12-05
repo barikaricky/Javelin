@@ -32,6 +32,8 @@ app.use('/api/guards', require('./routes/guardRoutes'));
 app.use('/api/gallery', require('./routes/galleryRoutes'));
 app.use('/api/upload', require('./routes/uploadRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
+app.use('/api/sites', require('./routes/siteRoutes'));
+app.use('/api/bookings', require('./routes/bookingRoutes'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

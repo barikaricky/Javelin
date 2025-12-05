@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FaLinkedinIn, FaTwitter, FaFacebookF, FaInstagram, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { TEAM_IMAGES } from '../../utils/imageHelper';
+import { apiGet } from '../../services/api';
 import './TeamSection.css';
 
 const TeamSection = () => {
@@ -8,72 +9,84 @@ const TeamSection = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [slidesToShow, setSlidesToShow] = useState(3);
+  const [team, setTeam] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const team = [
+  // Default team data as fallback
+  const defaultTeam = [
     {
       name: 'Chief Adebayo Williams',
       position: 'Chief Executive Officer',
       image: TEAM_IMAGES.CEO,
       bio: 'Over 20 years of experience in security management and strategic operations',
-      social: {
-        linkedin: 'https://linkedin.com',
-        twitter: 'https://twitter.com',
-        facebook: 'https://facebook.com',
-      }
+      social: { linkedin: 'https://linkedin.com', twitter: 'https://twitter.com', facebook: 'https://facebook.com' }
     },
     {
       name: 'Mrs. Chidinma Okonkwo',
       position: 'Managing Director',
       image: TEAM_IMAGES.MD,
       bio: 'Expert in corporate security solutions with 15+ years industry experience',
-      social: {
-        linkedin: 'https://linkedin.com',
-        twitter: 'https://twitter.com',
-        instagram: 'https://instagram.com',
-      }
+      social: { linkedin: 'https://linkedin.com', twitter: 'https://twitter.com', instagram: 'https://instagram.com' }
     },
     {
       name: 'Mr. Yusuf Mohammed',
       position: 'Operations Manager',
       image: TEAM_IMAGES.OPS_MANAGER,
       bio: 'Military veteran specializing in tactical operations and security protocols',
-      social: {
-        linkedin: 'https://linkedin.com',
-        facebook: 'https://facebook.com',
-      }
+      social: { linkedin: 'https://linkedin.com', facebook: 'https://facebook.com' }
     },
     {
       name: 'Miss Blessing Eze',
       position: 'HR Manager',
       image: TEAM_IMAGES.HR_MANAGER,
       bio: 'Human resources specialist focused on recruitment and staff development',
-      social: {
-        linkedin: 'https://linkedin.com',
-        twitter: 'https://twitter.com',
-        instagram: 'https://instagram.com',
-      }
+      social: { linkedin: 'https://linkedin.com', twitter: 'https://twitter.com', instagram: 'https://instagram.com' }
     },
     {
       name: 'Sergeant Emeka Nwosu',
       position: 'Senior Supervisor',
       image: TEAM_IMAGES.SUPERVISOR_1,
       bio: 'Field operations expert with expertise in residential and corporate security',
-      social: {
-        linkedin: 'https://linkedin.com',
-        facebook: 'https://facebook.com',
-      }
+      social: { linkedin: 'https://linkedin.com', facebook: 'https://facebook.com' }
     },
     {
       name: 'Officer Fatima Bello',
       position: 'Training Supervisor',
       image: TEAM_IMAGES.SUPERVISOR_2,
       bio: 'Certified security trainer specializing in guard development programs',
-      social: {
-        linkedin: 'https://linkedin.com',
-        twitter: 'https://twitter.com',
-      }
+      social: { linkedin: 'https://linkedin.com', twitter: 'https://twitter.com' }
     }
   ];
+
+  // Fetch team from backend
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const response = await apiGet('/team');
+        if (response.success && response.data.length > 0) {
+          // Map backend data to component format
+          const mappedTeam = response.data.map((member, idx) => ({
+            _id: member._id,
+            name: member.name,
+            position: member.position,
+            image: member.image || TEAM_IMAGES[Object.keys(TEAM_IMAGES)[idx % Object.keys(TEAM_IMAGES).length]],
+            bio: member.bio,
+            social: member.social || {}
+          }));
+          setTeam(mappedTeam);
+        } else {
+          setTeam(defaultTeam);
+        }
+      } catch (error) {
+        console.error('Error fetching team:', error);
+        setTeam(defaultTeam);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeam();
+  }, []);
 
   // Responsive slides to show
   useEffect(() => {

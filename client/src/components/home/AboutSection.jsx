@@ -54,18 +54,10 @@ const AboutSection = () => {
             </p>
           </div>
 
-          <div className="about-stats">
-            {stats.map((stat, index) => (
-              <div key={index} className="stat-card">
-                <div className="stat-icon">{stat.icon}</div>
-                <div className="stat-number">{stat.number}</div>
-                <div className="stat-label">{stat.label}</div>
-                <div className="stat-description">{stat.description}</div>
-              </div>
-            ))}
+         
           </div>
         </div>
-      </div>
+
     </section>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
 import PageLoader from './components/common/PageLoader';
 import Header from './components/common/Header';
@@ -13,6 +14,7 @@ import OurSites from './pages/OurSites';
 import Gallery from './pages/Gallery';
 import Recruitment from './pages/Recruitment';
 import Contact from './pages/Contact';
+import BookMeeting from './pages/BookMeeting';
 import NotFound from './pages/NotFound';
 // Admin Pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -32,8 +34,8 @@ const PublicLayout = ({ children }) => (
 
 // Main App Routes
 const AppRoutes = () => {
+  // eslint-disable-next-line no-unused-vars
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/admin');
 
   return (
     <>
@@ -51,6 +53,8 @@ const AppRoutes = () => {
           <Route path="/admin/team/edit/:id" element={<AdminForm type="team" />} />
           <Route path="/admin/guards/new" element={<AdminForm type="guards" />} />
           <Route path="/admin/guards/edit/:id" element={<AdminForm type="guards" />} />
+          <Route path="/admin/sites/new" element={<AdminForm type="sites" />} />
+          <Route path="/admin/sites/edit/:id" element={<AdminForm type="sites" />} />
           <Route path="/admin/gallery/new" element={<AdminForm type="gallery" />} />
           <Route path="/admin/gallery/edit/:id" element={<AdminForm type="gallery" />} />
 
@@ -62,6 +66,7 @@ const AppRoutes = () => {
           <Route path="/gallery" element={<PublicLayout><Gallery /></PublicLayout>} />
           <Route path="/recruitment" element={<PublicLayout><Recruitment /></PublicLayout>} />
           <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+          <Route path="/book-meeting" element={<PublicLayout><BookMeeting /></PublicLayout>} />
           <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
         </Routes>
       </div>
@@ -71,11 +76,13 @@ const AppRoutes = () => {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 

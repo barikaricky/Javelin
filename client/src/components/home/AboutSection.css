@@ -15,9 +15,18 @@
 }
 
 .about-text p {
-  color: var(--text-secondary);
+  color: #333333;
   line-height: 1.8;
   margin-bottom: 1.5rem;
+}
+
+.about-text h3.mt-4 {
+  margin-top: 2rem;
+  color: var(--color-primary-blue);
+}
+
+.about-text {
+  color: #333333;
 }
 
 .about-stats {

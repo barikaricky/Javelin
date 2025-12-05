@@ -3,7 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { 
   FaHome, FaBullhorn, FaGift, FaUsers, FaUserShield, FaImages, 
   FaSignOutAlt, FaBars, FaTimes, FaPlus, FaEdit, FaTrash,
-  FaChartBar, FaCalendarAlt, FaCog
+  FaChartBar, FaCalendarAlt, FaCog, FaMapMarkerAlt, FaClipboardList,
+  FaCheck, FaBan, FaEye, FaPhone, FaEnvelope, FaBuilding
 } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 import * as api from '../../services/api';
@@ -19,18 +20,20 @@ const AdminDashboard = () => {
     bonuses: 0,
     team: 0,
     guards: 0,
-    gallery: 0
+    gallery: 0,
+    sites: 0,
+    bookings: 0
   });
   const [data, setData] = useState({
     activities: [],
     bonuses: [],
     team: [],
     guards: [],
-    gallery: []
+    gallery: [],
+    sites: [],
+    bookings: []
   });
   const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false);
-  const [editItem, setEditItem] = useState(null);
 
   useEffect(() => {
     if (!isHeadPoster) {
@@ -43,12 +46,14 @@ const AdminDashboard = () => {
   const fetchAllData = async () => {
     setLoading(true);
     try {
-      const [activitiesRes, bonusesRes, teamRes, guardsRes, galleryRes] = await Promise.all([
+      const [activitiesRes, bonusesRes, teamRes, guardsRes, galleryRes, sitesRes, bookingsRes] = await Promise.all([
         api.getActivities(),
         api.getBonuses(),
         api.getTeamMembers(),
         api.getGuards(),
-        api.getGalleryImages()
+        api.getGalleryImages(),
+        api.getSites(),
+        api.getBookings()
       ]);
 
       setData({
@@ -56,7 +61,9 @@ const AdminDashboard = () => {
         bonuses: bonusesRes.data || [],
         team: teamRes.data || [],
         guards: guardsRes.data || [],
-        gallery: galleryRes.data || []
+        gallery: galleryRes.data || [],
+        sites: sitesRes.data || [],
+        bookings: bookingsRes.data || []
       });
 
       setStats({
@@ -64,7 +71,9 @@ const AdminDashboard = () => {
         bonuses: bonusesRes.total || bonusesRes.data?.length || 0,
         team: teamRes.count || teamRes.data?.length || 0,
         guards: guardsRes.total || guardsRes.data?.length || 0,
-        gallery: galleryRes.total || galleryRes.data?.length || 0
+        gallery: galleryRes.total || galleryRes.data?.length || 0,
+        sites: sitesRes.count || sitesRes.data?.length || 0,
+        bookings: bookingsRes.total || bookingsRes.data?.length || 0
       });
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -99,6 +108,12 @@ const AdminDashboard = () => {
         case 'gallery':
           result = await api.deleteGalleryImage(id);
           break;
+        case 'sites':
+          result = await api.deleteSite(id);
+          break;
+        case 'bookings':
+          result = await api.cancelBooking(id);
+          break;
         default:
           return;
       }
@@ -113,12 +128,25 @@ const AdminDashboard = () => {
 
   const menuItems = [
     { id: 'overview', icon: <FaChartBar />, label: 'Overview' },
+    { id: 'bookings', icon: <FaCalendarAlt />, label: 'Bookings' },
     { id: 'activities', icon: <FaBullhorn />, label: 'Activities' },
     { id: 'bonuses', icon: <FaGift />, label: 'Bonuses & Benefits' },
     { id: 'team', icon: <FaUsers />, label: 'Team Members' },
     { id: 'guards', icon: <FaUserShield />, label: 'Guards' },
+    { id: 'sites', icon: <FaMapMarkerAlt />, label: 'Sites' },
     { id: 'gallery', icon: <FaImages />, label: 'Gallery' },
   ];
+
+  const handleUpdateBookingStatus = async (bookingId, newStatus) => {
+    try {
+      const result = await api.updateBooking(bookingId, { status: newStatus });
+      if (result.success) {
+        fetchAllData();
+      }
+    } catch (error) {
+      console.error('Error updating booking status:', error);
+    }
+  };
 
   const renderOverview = () => (
     <div className="dashboard-overview">
@@ -152,11 +180,25 @@ const AdminDashboard = () => {
             <p>Guards</p>
           </div>
         </div>
+        <div className="stat-card" onClick={() => setActiveTab('sites')}>
+          <FaMapMarkerAlt className="stat-icon" />
+          <div className="stat-info">
+            <h3>{stats.sites}</h3>
+            <p>Sites</p>
+          </div>
+        </div>
         <div className="stat-card" onClick={() => setActiveTab('gallery')}>
           <FaImages className="stat-icon" />
           <div className="stat-info">
             <h3>{stats.gallery}</h3>
             <p>Gallery Images</p>
+          </div>
+        </div>
+        <div className="stat-card booking-stat" onClick={() => setActiveTab('bookings')}>
+          <FaCalendarAlt className="stat-icon" />
+          <div className="stat-info">
+            <h3>{stats.bookings}</h3>
+            <p>Bookings</p>
           </div>
         </div>
       </div>
@@ -277,10 +319,131 @@ const AdminDashboard = () => {
           { key: 'isPublished', label: 'Status', render: (val) => val ? '✅ Published' : '📝 Draft' },
           { key: 'createdAt', label: 'Date', render: (val) => new Date(val).toLocaleDateString() }
         ]);
+      case 'sites':
+        return renderDataTable('sites', data.sites, [
+          { key: 'name', label: 'Site Name' },
+          { key: 'location', label: 'Location' },
+          { key: 'type', label: 'Type', render: (val) => <span className={`badge ${val?.toLowerCase()}`}>{val}</span> },
+          { key: 'guards', label: 'Guards' },
+          { key: 'isActive', label: 'Status', render: (val) => val ? '✅ Active' : '❌ Inactive' }
+        ]);
+      case 'bookings':
+        return renderBookingsSection();
       default:
         return renderOverview();
     }
   };
+
+  const renderBookingsSection = () => (
+    <div className="data-section bookings-section">
+      <div className="section-header">
+        <h2>Booking Requests</h2>
+        <div className="booking-filters">
+          <select className="status-filter" onChange={(e) => {
+            // Could add filtering logic here
+          }}>
+            <option value="all">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+
+      {data.bookings.length === 0 ? (
+        <div className="no-data-box">
+          <FaCalendarAlt className="no-data-icon" />
+          <p>No booking requests yet.</p>
+        </div>
+      ) : (
+        <div className="bookings-grid">
+          {data.bookings.map(booking => (
+            <div key={booking._id} className={`booking-card status-${booking.status}`}>
+              <div className="booking-card__header">
+                <span className="booking-id">{booking.bookingId}</span>
+                <span className={`booking-status ${booking.status}`}>{booking.status}</span>
+              </div>
+              
+              <div className="booking-card__client">
+                <h4>{booking.clientName}</h4>
+                <p><FaEnvelope /> {booking.clientEmail}</p>
+                <p><FaPhone /> {booking.clientPhone}</p>
+                {booking.companyName && <p><FaBuilding /> {booking.companyName}</p>}
+              </div>
+
+              <div className="booking-card__details">
+                <div className="detail-item">
+                  <FaClipboardList />
+                  <span>{booking.serviceType}</span>
+                </div>
+                <div className="detail-item">
+                  <FaCalendarAlt />
+                  <span>{new Date(booking.preferredDate).toLocaleDateString('en-NG', {
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                  })}</span>
+                </div>
+                <div className="detail-item">
+                  <FaCog />
+                  <span>{booking.preferredTime}</span>
+                </div>
+                <div className="detail-item">
+                  <FaEye />
+                  <span>{booking.meetingType}</span>
+                </div>
+              </div>
+
+              {booking.serviceDescription && (
+                <div className="booking-card__notes">
+                  <small>Notes: {booking.serviceDescription}</small>
+                </div>
+              )}
+
+              <div className="booking-card__actions">
+                {booking.status === 'pending' && (
+                  <>
+                    <button 
+                      className="action-btn confirm"
+                      onClick={() => handleUpdateBookingStatus(booking._id, 'confirmed')}
+                    >
+                      <FaCheck /> Confirm
+                    </button>
+                    <button 
+                      className="action-btn cancel"
+                      onClick={() => handleUpdateBookingStatus(booking._id, 'cancelled')}
+                    >
+                      <FaBan /> Cancel
+                    </button>
+                  </>
+                )}
+                {booking.status === 'confirmed' && (
+                  <button 
+                    className="action-btn complete"
+                    onClick={() => handleUpdateBookingStatus(booking._id, 'completed')}
+                  >
+                    <FaCheck /> Mark Complete
+                  </button>
+                )}
+                <button 
+                  className="action-btn delete"
+                  onClick={() => handleDelete('bookings', booking._id)}
+                >
+                  <FaTrash />
+                </button>
+              </div>
+
+              <div className="booking-card__footer">
+                <small>Created: {new Date(booking.createdAt).toLocaleString()}</small>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <div className={`admin-dashboard ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>

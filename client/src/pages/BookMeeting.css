@@ -1,0 +1,613 @@
+/* Book Meeting Page Styles */
+.book-meeting-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Hero Section */
+.book-meeting-hero {
+  background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+  padding: 120px 0 60px;
+  text-align: center;
+  color: white;
+}
+
+.book-meeting-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: fadeInDown 0.6s ease;
+}
+
+.book-meeting-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+/* Booking Section */
+.booking-section {
+  padding: 60px 0;
+  margin-top: -40px;
+}
+
+.booking-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Progress Steps */
+.booking-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  gap: 10px;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.progress-step.active .step-number {
+  background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%);
+  color: white;
+  transform: scale(1.1);
+}
+
+.progress-step.completed .step-number {
+  background: #28a745;
+  color: white;
+}
+
+.progress-step span {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.progress-step.active span {
+  color: #1a2a6c;
+  font-weight: 600;
+}
+
+.progress-line {
+  flex: 1;
+  height: 3px;
+  background: #ddd;
+  max-width: 100px;
+}
+
+/* Form Styles */
+.booking-form {
+  padding: 40px;
+}
+
+.form-step {
+  animation: fadeIn 0.5s ease;
+}
+
+.form-step h2 {
+  font-size: 1.8rem;
+  color: #1a2a6c;
+  margin-bottom: 0.5rem;
+}
+
+.form-step > p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.form-group label svg {
+  color: #1a2a6c;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #1a2a6c;
+  box-shadow: 0 0 0 4px rgba(26, 42, 108, 0.1);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Service Grid */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 2rem;
+}
+
+.service-card {
+  padding: 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.service-card svg {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.service-card span {
+  display: block;
+  font-weight: 500;
+  color: #333;
+}
+
+.service-card:hover {
+  border-color: #1a2a6c;
+  transform: translateY(-2px);
+}
+
+.service-card.selected {
+  border-color: #1a2a6c;
+  background: linear-gradient(135deg, rgba(26, 42, 108, 0.1) 0%, rgba(178, 31, 31, 0.05) 100%);
+}
+
+.service-card.selected svg {
+  color: #1a2a6c;
+}
+
+/* Meeting Type Options */
+.meeting-type-options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.meeting-type-card {
+  flex: 1;
+  min-width: 120px;
+  padding: 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.meeting-type-card svg {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.meeting-type-card span {
+  display: block;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.meeting-type-card:hover {
+  border-color: #1a2a6c;
+}
+
+.meeting-type-card.selected {
+  border-color: #1a2a6c;
+  background: linear-gradient(135deg, rgba(26, 42, 108, 0.1) 0%, rgba(178, 31, 31, 0.05) 100%);
+}
+
+.meeting-type-card.selected svg {
+  color: #1a2a6c;
+}
+
+/* Booking Summary */
+.booking-summary {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 2rem;
+}
+
+.booking-summary h3 {
+  color: #1a2a6c;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-item span {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.summary-item strong {
+  color: #333;
+}
+
+/* Form Navigation */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.btn {
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%);
+  color: white;
+  margin-left: auto;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(26, 42, 108, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #1a2a6c;
+  color: #1a2a6c;
+}
+
+.btn-outline:hover {
+  background: rgba(26, 42, 108, 0.1);
+}
+
+.btn-submit {
+  padding: 18px 40px;
+}
+
+/* Error Message */
+.error-message {
+  background: #fff5f5;
+  border: 1px solid #fc8181;
+  color: #c53030;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Success Page */
+.booking-success {
+  max-width: 700px;
+  margin: 120px auto 60px;
+  padding: 40px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+.success-icon {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  animation: scaleIn 0.6s ease;
+}
+
+.success-icon svg {
+  font-size: 3rem;
+  color: white;
+}
+
+.booking-success h1 {
+  color: #1a2a6c;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Booking Details Card */
+.booking-details-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 2rem;
+}
+
+.booking-id {
+  background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.booking-id span {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+
+.booking-id strong {
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+.booking-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  text-align: left;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.info-item svg {
+  color: #1a2a6c;
+  font-size: 1.2rem;
+  margin-top: 3px;
+}
+
+.info-item div {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-item span {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.info-item strong {
+  color: #333;
+}
+
+.info-item.status {
+  justify-content: center;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.note {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.success-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .book-meeting-hero {
+    padding: 100px 20px 50px;
+  }
+
+  .book-meeting-hero h1 {
+    font-size: 2rem;
+  }
+
+  .booking-section {
+    padding: 40px 15px;
+  }
+
+  .booking-container {
+    border-radius: 15px;
+  }
+
+  .booking-form {
+    padding: 25px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .meeting-type-options {
+    flex-direction: column;
+  }
+
+  .form-navigation {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    margin-left: 0;
+    order: -1;
+  }
+
+  .booking-success {
+    margin: 100px 15px 40px;
+    padding: 25px;
+  }
+
+  .booking-id strong {
+    font-size: 1.4rem;
+  }
+
+  .booking-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-step span {
+    display: none;
+  }
+
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .success-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,284 @@
+.guards-section {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.guards-section .section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.guards-section .section-header h2 {
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 15px;
+}
+
+.guards-section .section-header p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.guards-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.guards-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 58, 103, 0.3);
+}
+
+.guards-nav:hover {
+  background: var(--primary-dark);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.guards-nav--prev {
+  left: -25px;
+}
+
+.guards-nav--next {
+  right: -25px;
+}
+
+.guards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  flex: 1;
+}
+
+.guard-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.guard-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.guard-card__image {
+  position: relative;
+  height: 200px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guard-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.guard-card__placeholder {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guard-card__placeholder svg {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.guard-card__rank {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: var(--secondary-color);
+  color: var(--primary-dark);
+}
+
+.guard-card__rank.rank-sergeant {
+  background: #dc3545;
+  color: white;
+}
+
+.guard-card__rank.rank-senior {
+  background: var(--secondary-color);
+  color: var(--primary-dark);
+}
+
+.guard-card__rank.rank-officer {
+  background: #28a745;
+  color: white;
+}
+
+.guard-card__status {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #28a745;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.guard-card__content {
+  padding: 25px;
+}
+
+.guard-card__name {
+  font-size: 1.25rem;
+  color: var(--primary-dark);
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.guard-card__id {
+  color: #888;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+}
+
+.guard-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.guard-card__rating svg {
+  font-size: 0.9rem;
+}
+
+.guard-card__rating .star-filled {
+  color: var(--secondary-color);
+}
+
+.guard-card__rating .star-empty {
+  color: #ddd;
+}
+
+.guard-card__rating span {
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-left: 5px;
+}
+
+.guard-card__experience {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.guard-card__specializations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.specialization-tag {
+  background: rgba(0, 58, 103, 0.1);
+  color: var(--primary-color);
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.guard-card__certifications {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #28a745;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.guard-card__certifications svg {
+  font-size: 1rem;
+}
+
+.guards-summary {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 50px;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.guards-summary__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--primary-dark);
+  font-size: 1rem;
+}
+
+.guards-summary__item svg {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+@media (max-width: 1024px) {
+  .guards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .guards-section {
+    padding: 60px 0;
+  }
+
+  .guards-section .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .guards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guards-nav {
+    display: none;
+  }
+
+  .guards-summary {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+}

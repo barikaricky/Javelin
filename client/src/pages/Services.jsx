@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from '../components/SEO/SEOHead';
 import { 
   FaUserShield, 
   FaBuilding, 
@@ -18,6 +19,39 @@ import './Services.css';
 
 const Services = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+
+  // SEO structured data for services
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Javelin Security Services Nigeria",
+    "itemListElement": [
+      {
+        "@type": "Service",
+        "position": 1,
+        "name": "Private Guard Services",
+        "description": "Professional security guards for personal protection in Nigeria"
+      },
+      {
+        "@type": "Service",
+        "position": 2,
+        "name": "Corporate Security",
+        "description": "Comprehensive security solutions for offices and commercial buildings Lagos"
+      },
+      {
+        "@type": "Service",
+        "position": 3,
+        "name": "Event Security",
+        "description": "Professional crowd control and security management Nigeria"
+      },
+      {
+        "@type": "Service",
+        "position": 4,
+        "name": "VIP Protection",
+        "description": "Executive protection and bodyguard services Lagos Abuja"
+      }
+    ]
+  };
 
   const services = [
     {
@@ -189,6 +223,15 @@ const Services = () => {
 
   return (
     <div className="services-page">
+      <SEOHead 
+        title="Security Services Nigeria - Armed Guards, VIP Protection, Corporate Security"
+        description="Javelin Associates offers premium security services in Nigeria including armed guards, VIP protection, corporate security, event security, CCTV surveillance & mobile patrol. Get free quote now!"
+        keywords="security services Nigeria, armed guards Lagos, VIP protection Abuja, corporate security Nigeria, event security Lagos, CCTV monitoring Nigeria, mobile patrol Abuja, bodyguard services Nigeria, executive protection Lagos"
+        url="/services"
+      />
+      <script type="application/ld+json">
+        {JSON.stringify(servicesSchema)}
+      </script>
       {/* Hero Section */}
       <section className="services-hero">
         <div className="container">
@@ -250,7 +293,7 @@ const Services = () => {
                   ))}
                 </ul>
 
-                <Link to="/contact" className="btn btn-primary btn-block">
+                <Link to={`/book-meeting?service=${encodeURIComponent(service.title)}`} className="btn btn-primary btn-block">
                   Request Quote <FaArrowRight />
                 </Link>
               </div>
@@ -266,8 +309,8 @@ const Services = () => {
             <h2>Need a Custom Security Solution?</h2>
             <p>Contact us for a personalized quote tailored to your specific security needs</p>
             <div className="cta-buttons">
-              <Link to="/contact" className="btn btn-primary btn-lg">
-                Get Custom Quote
+              <Link to="/book-meeting" className="btn btn-primary btn-lg">
+                Book a Consultation
               </Link>
               <Link to="/recruitment" className="btn btn-outline btn-lg">
                 Join Our Team

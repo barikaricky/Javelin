@@ -1,6 +1,7 @@
-# Javelin Associates Security - Robots.txt
-# https://www.javelinassociates.org
+# Javelin Associates Security Services - robots.txt
+# https://www.javelinassociates.com
 
+# Allow all search engines
 User-agent: *
 Allow: /
 
@@ -8,19 +9,58 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
+Disallow: /*.json$
+
+# Allow important resources
+Allow: /manifest.json
+Allow: /sitemap.xml
 
 # Sitemap location
-Sitemap: https://www.javelinassociates.org/sitemap.xml
+Sitemap: https://www.javelinassociates.com/sitemap.xml
 
-# Crawl delay for respectful crawling
+# Crawl-delay for polite crawling
 Crawl-delay: 1
 
-# Allow all major search engines
+# Google specific
 User-agent: Googlebot
 Allow: /
+Disallow: /admin/
+Crawl-delay: 0
 
+# Bing specific  
 User-agent: Bingbot
 Allow: /
+Disallow: /admin/
+Crawl-delay: 1
 
-User-agent: Yandex
+# Google Images
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /uploads/
+Disallow: /admin/
+
+# Allow social media bots for better sharing
+User-agent: facebookexternalhit
 Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

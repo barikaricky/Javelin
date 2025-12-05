@@ -100,10 +100,29 @@ export const createGalleryImage = (data) => apiPost('/gallery', data);
 export const updateGalleryImage = (id, data) => apiPut(`/gallery/${id}`, data);
 export const deleteGalleryImage = (id) => apiDelete(`/gallery/${id}`);
 
-export default {
+// Sites
+export const getSites = (params = '') => apiGet(`/sites${params}`);
+export const getSiteStats = () => apiGet('/sites/stats');
+export const getSite = (id) => apiGet(`/sites/${id}`);
+export const createSite = (data) => apiPost('/sites', data);
+export const updateSite = (id, data) => apiPut(`/sites/${id}`, data);
+export const deleteSite = (id) => apiDelete(`/sites/${id}`);
+
+// Bookings
+export const getBookings = (params = '') => apiGet(`/bookings${params}`);
+export const getBooking = (id) => apiGet(`/bookings/${id}`);
+export const createBooking = (data) => apiPost('/bookings', data);
+export const updateBooking = (id, data) => apiPut(`/bookings/${id}`, data);
+export const deleteBooking = (id) => apiDelete(`/bookings/${id}`);
+export const updateBookingStatus = (id, status) => apiPut(`/bookings/${id}/status`, { status });
+export const cancelBooking = (id) => apiPut(`/bookings/${id}/status`, { status: 'cancelled' });
+
+const apiExports = {
   apiGet,
   apiPost,
   apiPut,
   apiDelete,
   uploadFile
 };
+
+export default apiExports;
