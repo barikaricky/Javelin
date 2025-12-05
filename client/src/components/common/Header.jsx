@@ -35,7 +35,7 @@ const Header = () => {
             <div className="header__contact">
               <a href="tel:+2348012345678" className="header__contact-item">
                 <FaPhone className="header__icon" />
-                <span className="hide-mobile">+2348134233131</span>
+                <span className="hide-mobile">+234 801 234 5678</span>
               </a>
               <a href="mailto:info@javelinassociates.com" className="header__contact-item">
                 <FaEnvelope className="header__icon" />
