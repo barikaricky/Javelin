@@ -1,14 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaTimes, FaChevronLeft, FaChevronRight, FaExpand } from 'react-icons/fa';
 import { GALLERY_IMAGES } from '../../utils/imageHelper';
+import { galleryAPI } from '../../services/api';
 import './GallerySection.css';
 
 const GallerySection = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [galleryItems, setGalleryItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fallback gallery items
+  const fallbackGalleryItems = [
+    { image: GALLERY_IMAGES[0], title: 'Professional Guard on Duty', category: 'Personnel' },
+    { image: GALLERY_IMAGES[1], title: 'Corporate Security Team', category: 'Corporate' },
+    { image: GALLERY_IMAGES[2], title: 'Trained Security Personnel', category: 'Training' },
+    { image: GALLERY_IMAGES[3], title: 'Event Security Service', category: 'Events' },
+    { image: GALLERY_IMAGES[4], title: 'Mobile Patrol Unit', category: 'Patrol' },
+    { image: GALLERY_IMAGES[5], title: 'Security Operations', category: 'Operations' },
+  ];
+
+  useEffect(() => {
+    fetchGallery();
+  }, []);
+
+  const fetchGallery = async () => {
+    try {
+      const response = await galleryAPI.getAll();
+      if (response.data && response.data.length > 0) {
+        // Transform API data to match component structure
+        const transformedData = response.data.map(item => ({
+          _id: item._id,
+          image: item.image,
+          title: item.title,
+          category: item.category
+        }));
+        setGalleryItems(transformedData);
+      } else {
+        setGalleryItems(fallbackGalleryItems);
+      }
+    } catch (error) {
+      console.error('Error fetching gallery:', error);
+      setGalleryItems(fallbackGalleryItems);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const displayGallery = galleryItems.length > 0 ? galleryItems : fallbackGalleryItems;
 
   const openLightbox = (index) => {
-    setSelectedImage(GALLERY_IMAGES[index]);
+    setSelectedImage(displayGallery[index]?.image);
     setCurrentIndex(index);
   };
 
@@ -17,25 +59,16 @@ const GallerySection = () => {
   };
 
   const nextImage = () => {
-    const newIndex = (currentIndex + 1) % GALLERY_IMAGES.length;
+    const newIndex = (currentIndex + 1) % displayGallery.length;
     setCurrentIndex(newIndex);
-    setSelectedImage(GALLERY_IMAGES[newIndex]);
+    setSelectedImage(displayGallery[newIndex]?.image);
   };
 
   const prevImage = () => {
-    const newIndex = (currentIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+    const newIndex = (currentIndex - 1 + displayGallery.length) % displayGallery.length;
     setCurrentIndex(newIndex);
-    setSelectedImage(GALLERY_IMAGES[newIndex]);
+    setSelectedImage(displayGallery[newIndex]?.image);
   };
-
-  const galleryItems = [
-    { image: GALLERY_IMAGES[0], title: 'Professional Guard on Duty', category: 'Personnel' },
-    { image: GALLERY_IMAGES[1], title: 'Corporate Security Team', category: 'Corporate' },
-    { image: GALLERY_IMAGES[2], title: 'Trained Security Personnel', category: 'Training' },
-    { image: GALLERY_IMAGES[3], title: 'Event Security Service', category: 'Events' },
-    { image: GALLERY_IMAGES[4], title: 'Mobile Patrol Unit', category: 'Patrol' },
-    { image: GALLERY_IMAGES[5], title: 'Security Operations', category: 'Operations' },
-  ];
 
   return (
     <section className="gallery-section">
@@ -46,8 +79,8 @@ const GallerySection = () => {
         </div>
 
         <div className="gallery-grid">
-          {galleryItems.map((item, index) => (
-            <div key={index} className="gallery-item" onClick={() => openLightbox(index)}>
+          {displayGallery.map((item, index) => (
+            <div key={item._id || index} className="gallery-item" onClick={() => openLightbox(index)}>
               <div className="gallery-item__image">
                 <img src={item.image} alt={item.title} />
                 <div className="gallery-item__overlay">
@@ -77,7 +110,7 @@ const GallerySection = () => {
           <div className="lightbox__content" onClick={(e) => e.stopPropagation()}>
             <img src={selectedImage} alt="Gallery" />
             <div className="lightbox__counter">
-              {currentIndex + 1} / {GALLERY_IMAGES.length}
+              {currentIndex + 1} / {displayGallery.length}
             </div>
           </div>
           

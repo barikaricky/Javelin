@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaFax } from 'react-icons/fa';
+import { contactAPI } from '../../services/api';
 import './ContactInfo.css';
 
 const ContactInfo = () => {
-  const contactDetails = [
+  const [contactData, setContactData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fallback contact details
+  const fallbackContactDetails = [
     {
       icon: <FaMapMarkerAlt />,
       title: 'Head Office',
@@ -35,6 +40,63 @@ const ContactInfo = () => {
       link: null
     }
   ];
+
+  useEffect(() => {
+    fetchContactInfo();
+  }, []);
+
+  const fetchContactInfo = async () => {
+    try {
+      const response = await contactAPI.getInfo();
+      if (response.data) {
+        setContactData(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching contact info:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Build contact details from API data or use fallback
+  const buildContactDetails = () => {
+    if (!contactData) return fallbackContactDetails;
+
+    return [
+      {
+        icon: <FaMapMarkerAlt />,
+        title: 'Head Office',
+        content: contactData.address || fallbackContactDetails[0].content,
+        link: null
+      },
+      {
+        icon: <FaPhone />,
+        title: 'Phone Numbers',
+        content: contactData.phones?.join('\n') || fallbackContactDetails[1].content,
+        link: contactData.phones?.[0] ? `tel:${contactData.phones[0].replace(/\s/g, '')}` : null
+      },
+      {
+        icon: <FaEnvelope />,
+        title: 'Email Address',
+        content: contactData.emails?.join('\n') || fallbackContactDetails[2].content,
+        link: contactData.emails?.[0] ? `mailto:${contactData.emails[0]}` : null
+      },
+      {
+        icon: <FaFax />,
+        title: 'Fax',
+        content: contactData.fax || fallbackContactDetails[3].content,
+        link: null
+      },
+      {
+        icon: <FaClock />,
+        title: 'Office Hours',
+        content: contactData.officeHours || fallbackContactDetails[4].content,
+        link: null
+      }
+    ];
+  };
+
+  const contactDetails = buildContactDetails();
 
   return (
     <div className="contact-info">

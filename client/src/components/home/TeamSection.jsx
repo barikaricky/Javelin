@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaLinkedinIn, FaTwitter, FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { teamAPI } from '../../services/api';
 import { TEAM_IMAGES } from '../../utils/imageHelper';
 import './TeamSection.css';
 
 const TeamSection = () => {
-  const team = [
+  const [team, setTeam] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fallback team data
+  const fallbackTeam = [
     {
       name: 'Chief Adebayo Williams',
       position: 'Chief Executive Officer',
       image: TEAM_IMAGES.CEO,
       bio: 'Over 20 years of experience in security management and strategic operations',
-      social: {
+      socialLinks: {
         linkedin: 'https://linkedin.com',
         twitter: 'https://twitter.com',
         facebook: 'https://facebook.com',
@@ -21,7 +26,7 @@ const TeamSection = () => {
       position: 'Managing Director',
       image: TEAM_IMAGES.MD,
       bio: 'Expert in corporate security solutions with 15+ years industry experience',
-      social: {
+      socialLinks: {
         linkedin: 'https://linkedin.com',
         twitter: 'https://twitter.com',
         instagram: 'https://instagram.com',
@@ -32,7 +37,7 @@ const TeamSection = () => {
       position: 'Operations Manager',
       image: TEAM_IMAGES.OPS_MANAGER,
       bio: 'Military veteran specializing in tactical operations and security protocols',
-      social: {
+      socialLinks: {
         linkedin: 'https://linkedin.com',
         facebook: 'https://facebook.com',
       }
@@ -42,7 +47,7 @@ const TeamSection = () => {
       position: 'HR Manager',
       image: TEAM_IMAGES.HR_MANAGER,
       bio: 'Human resources specialist focused on recruitment and staff development',
-      social: {
+      socialLinks: {
         linkedin: 'https://linkedin.com',
         twitter: 'https://twitter.com',
         instagram: 'https://instagram.com',
@@ -53,7 +58,7 @@ const TeamSection = () => {
       position: 'Senior Supervisor',
       image: TEAM_IMAGES.SUPERVISOR_1,
       bio: 'Field operations expert with expertise in residential and corporate security',
-      social: {
+      socialLinks: {
         linkedin: 'https://linkedin.com',
         facebook: 'https://facebook.com',
       }
@@ -63,12 +68,34 @@ const TeamSection = () => {
       position: 'Training Supervisor',
       image: TEAM_IMAGES.SUPERVISOR_2,
       bio: 'Certified security trainer specializing in guard development programs',
-      social: {
+      socialLinks: {
         linkedin: 'https://linkedin.com',
         twitter: 'https://twitter.com',
       }
     }
   ];
+
+  useEffect(() => {
+    fetchTeam();
+  }, []);
+
+  const fetchTeam = async () => {
+    try {
+      const response = await teamAPI.getAll();
+      if (response.data.data && response.data.data.length > 0) {
+        setTeam(response.data.data);
+      } else {
+        setTeam(fallbackTeam);
+      }
+    } catch (error) {
+      console.error('Error fetching team:', error);
+      setTeam(fallbackTeam);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const displayTeam = team.length > 0 ? team : fallbackTeam;
 
   return (
     <section className="team-section">
@@ -79,8 +106,8 @@ const TeamSection = () => {
         </div>
 
         <div className="team-grid">
-          {team.map((member, index) => (
-            <div key={index} className="team-card">
+          {displayTeam.map((member, index) => (
+            <div key={member._id || index} className="team-card">
               <div className="team-card__image-wrapper">
                 <img 
                   src={member.image} 
@@ -92,9 +119,9 @@ const TeamSection = () => {
                 />
                 <div className="team-card__overlay">
                   <div className="team-card__social">
-                    {member.social.linkedin && (
+                    {member.socialLinks?.linkedin && (
                       <a 
-                        href={member.social.linkedin} 
+                        href={member.socialLinks.linkedin} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="team-social-link"
@@ -103,9 +130,9 @@ const TeamSection = () => {
                         <FaLinkedinIn />
                       </a>
                     )}
-                    {member.social.twitter && (
+                    {member.socialLinks?.twitter && (
                       <a 
-                        href={member.social.twitter} 
+                        href={member.socialLinks.twitter} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="team-social-link"
@@ -114,9 +141,9 @@ const TeamSection = () => {
                         <FaTwitter />
                       </a>
                     )}
-                    {member.social.facebook && (
+                    {member.socialLinks?.facebook && (
                       <a 
-                        href={member.social.facebook} 
+                        href={member.socialLinks.facebook} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="team-social-link"
@@ -125,9 +152,9 @@ const TeamSection = () => {
                         <FaFacebookF />
                       </a>
                     )}
-                    {member.social.instagram && (
+                    {member.socialLinks?.instagram && (
                       <a 
-                        href={member.social.instagram} 
+                        href={member.socialLinks.instagram} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="team-social-link"
