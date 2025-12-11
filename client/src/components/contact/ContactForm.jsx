@@ -30,9 +30,10 @@ const ContactForm = () => {
     setStatus({ loading: true, success: false, error: null });
 
     try {
-      // Use full URL for API endpoint
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      const response = await axios.post(`${apiUrl}/api/contact`, formData);
+      // Use relative /api path for Netlify, or full URL for local dev
+      const apiUrl = process.env.REACT_APP_API_URL || 
+        (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
+      const response = await axios.post(`${apiUrl}/contact`, formData);
       
       if (response.data.success) {
         setStatus({ loading: false, success: true, error: null });

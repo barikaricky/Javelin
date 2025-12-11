@@ -7,6 +7,7 @@ import TeamSection from '../components/home/TeamSection';
 import SitesSection from '../components/home/SitesSection';
 import WhyChooseUs from '../components/home/WhyChooseUs';
 import GallerySection from '../components/home/GallerySection';
+import NewsSection from '../components/home/NewsSection';
 import TestimonialsSlider from '../components/home/TestimonialsSlider';
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
       <SitesSection />
       <WhyChooseUs />
       <GallerySection />
+      <NewsSection />
       <TestimonialsSlider />
     </div>
   );

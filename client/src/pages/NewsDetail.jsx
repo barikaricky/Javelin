@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { newsAPI } from '../services/api';
+import { buildImageUrl } from '../utils/imageHelper';
 import { FiCalendar, FiUser, FiEye, FiArrowLeft, FiTag } from 'react-icons/fi';
 import './NewsDetail.css';
 
@@ -18,7 +19,13 @@ const NewsDetail = () => {
   const fetchPost = async () => {
     try {
       const response = await newsAPI.getBySlug(slug);
-      setPost(response.data.data);
+      const postData = response.data.data;
+      
+      // Normalize image URL
+      setPost({
+        ...postData,
+        featuredImage: buildImageUrl(postData.featuredImage)
+      });
     } catch (err) {
       console.error('Error fetching post:', err);
       setError('Post not found');

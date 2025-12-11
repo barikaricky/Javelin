@@ -1,0 +1,30 @@
+[build]
+  command = "cd client && npm install && npm run build"
+  functions = "netlify/functions"
+  publish = "client/build"
+
+[dev]
+  command = "npm run dev"
+  port = 3000
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production.environment]
+  NODE_ENV = "production"
+  REACT_APP_API_URL = "https://javelinassociates.org/api"
+
+[context.preview.environment]
+  NODE_ENV = "development"
+  REACT_APP_API_URL = "https://javelinassociates.org/api"
+
+[context.development.environment]
+  NODE_ENV = "development"
+  REACT_APP_API_URL = "http://localhost:3000/api"

@@ -1,33 +1,35 @@
-export const API_BASE_URL =
-  process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_BASE_URL = process.env.REACT_APP_API_URL ? 
+  process.env.REACT_APP_API_URL.replace('/api', '') : 
+  (process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5000');
 
 /**
  * Convert whatever the backend stored (Windows path, relative path, etc.)
  * into a browser-safe URL.
  */
 export const buildImageUrl = (rawPath) => {
-  if (!rawPath) return '';
+  if (!rawPath) return '/images/javelin-logo.png'; // Default fallback
 
   // Already a full URL or protocol-relative URL or data URI
   if (/^(https?:)?\/\//i.test(rawPath) || rawPath.startsWith('data:')) {
     return rawPath;
   }
 
-  // Normalize Windows backslashes → POSIX-style slashes
-  const normalized = rawPath.replace(/\\/g, '/');
-
-  // Try to extract `/uploads/...` if present
-  const uploadsIdx = normalized.toLowerCase().lastIndexOf('/uploads/');
-  let relativePath = normalized;
-
-  if (uploadsIdx !== -1) {
-    // e.g. "C:/path/server/uploads/file.jpg" → "/uploads/file.jpg"
-    relativePath = normalized.slice(uploadsIdx);
-  } else if (!normalized.startsWith('/')) {
-    relativePath = `/${normalized}`;
+  // If it starts with /uploads, construct full URL
+  if (rawPath.startsWith('/uploads')) {
+    return `${API_BASE_URL}${rawPath}`;
   }
 
-  return `${API_BASE_URL}${relativePath}`;
+  // If it starts with uploads (without slash)
+  if (rawPath.startsWith('uploads')) {
+    return `${API_BASE_URL}/${rawPath}`;
+  }
+
+  // Default case: assume it's a relative path
+  return rawPath;
+};
+
+export const getImageOrDefault = (imageUrl, defaultImage = '/images/javelin-logo.png') => {
+  return imageUrl || defaultImage;
 };
 
 // Shared image constants used across the app

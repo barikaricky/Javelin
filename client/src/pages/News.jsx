@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { newsAPI } from '../services/api';
+import { buildImageUrl } from '../utils/imageHelper';
 import { FiCalendar, FiEye, FiArrowRight } from 'react-icons/fi';
 import './News.css';
 
@@ -33,7 +34,16 @@ const News = () => {
         page,
         limit: 9
       });
-      setPosts(response.data.data);
+      
+      const postsData = response.data.data || [];
+      
+      // Normalize image URLs
+      const normalizedPosts = postsData.map(post => ({
+        ...post,
+        featuredImage: buildImageUrl(post.featuredImage)
+      }));
+      
+      setPosts(normalizedPosts);
       setTotalPages(response.data.pages || 1);
     } catch (err) {
       console.error('Error fetching news:', err);
@@ -94,7 +104,10 @@ const News = () => {
                       <img 
                         src={post.featuredImage} 
                         alt={post.title}
-                        onError={(e) => e.target.src = '/assets/images/placeholder.jpg'}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = '/images/javelin-logo.png';
+                        }}
                       />
                       <span className="news-category">{post.category}</span>
                     </div>
