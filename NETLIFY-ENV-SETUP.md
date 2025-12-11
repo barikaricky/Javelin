@@ -27,12 +27,13 @@ ADMIN_EMAIL=hr@javelinassociates.com
 
 The frontend `.env.production` now points to:
 ```
-REACT_APP_API_URL=https://devserver-main--javelinbackend.netlify.app/api
+REACT_APP_API_URL=https://javelinassocaite.netlify.app//api
 ```
 
 ## What Changed
 
 1. ✅ Frontend `.env.production` updated to use backend URL
+
 2. ✅ Backend CORS now allows all origins (safe on Netlify)
 3. ✅ Trailing slashes removed from URLs
 
