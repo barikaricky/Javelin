@@ -1,8 +1,11 @@
 [build]
   base = "server"
-  command = "npm install"
+  command = "npm ci --legacy-peer-deps"
   functions = "netlify/functions"
   publish = "public"
+
+[build.environment]
+  NODE_VERSION = "18"
 
 [[redirects]]
   from = "/api/*"
