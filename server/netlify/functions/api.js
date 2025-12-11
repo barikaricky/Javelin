@@ -28,11 +28,8 @@ app.use(cors({
       process.env.CLIENT_URL || 'https://javelinassociates.org'
     ].filter(Boolean);
 
-    if (allowedOrigins.indexOf(origin) !== -1 || origin.includes('devtunnels.ms')) {
-      callback(null, true);
-    } else {
-      callback(null, true); // allow others for development
-    }
+    // Always allow - in production CORS errors won't block requests in Netlify
+    callback(null, true);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
