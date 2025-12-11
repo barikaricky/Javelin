@@ -1,6 +1,6 @@
 [build]
   base = "server"
-  command = "npm ci --legacy-peer-deps"
+  command = "npm install --legacy-peer-deps"
   functions = "netlify/functions"
   publish = "public"
 
