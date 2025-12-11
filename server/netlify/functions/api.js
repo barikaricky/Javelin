@@ -7,8 +7,8 @@ const express = require('express');
 const cors = require('cors');
 const serverless = require('serverless-http');
 const path = require('path');
-const connectDB = require('../config/database');
-const errorHandler = require('../middleware/errorHandler');
+const connectDB = require('../../config/database');
+const errorHandler = require('../../middleware/errorHandler');
 
 // Initialize DB connection once
 connectDB();
@@ -40,7 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Static uploads
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -48,15 +48,15 @@ app.get('/api/health', (req, res) => {
 });
 
 // Routes
-app.use('/api/auth', require('../routes/authRoutes'));
-app.use('/api/team', require('../routes/teamRoutes'));
-app.use('/api/sites', require('../routes/sitesRoutes'));
-app.use('/api/gallery', require('../routes/galleryRoutes'));
-app.use('/api/news', require('../routes/newsRoutes'));
-app.use('/api/contact', require('../routes/newContactRoutes'));
-app.use('/api/applications', require('../routes/applicationRoutes'));
-app.use('/api/services', require('../routes/serviceRoutes'));
-app.use('/api/appointments', require('../routes/appointmentRoutes'));
+app.use('/api/auth', require('../../routes/authRoutes'));
+app.use('/api/team', require('../../routes/teamRoutes'));
+app.use('/api/sites', require('../../routes/sitesRoutes'));
+app.use('/api/gallery', require('../../routes/galleryRoutes'));
+app.use('/api/news', require('../../routes/newsRoutes'));
+app.use('/api/contact', require('../../routes/newContactRoutes'));
+app.use('/api/applications', require('../../routes/applicationRoutes'));
+app.use('/api/services', require('../../routes/serviceRoutes'));
+app.use('/api/appointments', require('../../routes/appointmentRoutes'));
 
 // Error handler
 app.use(errorHandler);
