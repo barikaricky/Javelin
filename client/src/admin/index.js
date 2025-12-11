@@ -1,4 +1,5 @@
 export { default as Login } from './Login';
+export { default as Register } from './Register';
 export { default as AdminLayout } from './AdminLayout';
 export { default as Dashboard } from './Dashboard';
 export { default as TeamManager } from './TeamManager';
@@ -7,4 +8,5 @@ export { default as GalleryManager } from './GalleryManager';
 export { default as NewsManager } from './NewsManager';
 export { default as MessagesManager } from './MessagesManager';
 export { default as ContactInfoManager } from './ContactInfoManager';
+export { default as AppointmentsManager } from './AppointmentsManager';
 export { default as ProtectedRoute } from './ProtectedRoute';

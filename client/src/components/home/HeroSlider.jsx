@@ -1,91 +1,80 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShieldAlt, FaUserShield, FaCheckCircle, FaVideo, FaCar, FaBuilding, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { HERO_IMAGES, PLACEHOLDER_IMAGES } from '../../utils/imageHelper';
 import './HeroSlider.css';
+
+const FALLBACK_IMAGE = '/images/javelin-site-5.jpg';
 
 const slides = [
   {
-    id: 1,
-    title: 'Professional Security Guards',
-    subtitle: 'Trained • Certified • Reliable',
-    description: 'Elite security personnel protecting what matters most to you',
-    icon: <FaUserShield />,
-    gradient: 'linear-gradient(135deg, rgba(0, 58, 103, 0.85) 0%, rgba(0, 102, 204, 0.85) 100%)',
-    image: HERO_IMAGES.SLIDE_1,
-    fallback: PLACEHOLDER_IMAGES.GUARD,
-    cta: {
-      primary: { text: 'Request Service', link: '/services' },
-      secondary: { text: 'View Our Guards', link: '/about' }
-    }
-  },
-  {
-    id: 2,
-    title: 'Corporate & Residential Protection',
-    subtitle: '24/7 Monitoring • Rapid Response',
-    description: 'Comprehensive security solutions for businesses and homes',
+    image: '/images/javelin-logo-1.jpg',
+    title: 'Professional Security Services',
+    subtitle: 'Protecting What Matters Most',
+    description: 'Comprehensive security solutions tailored to your needs',
     icon: <FaShieldAlt />,
-    gradient: 'linear-gradient(135deg, rgba(0, 32, 68, 0.85) 0%, rgba(0, 58, 103, 0.85) 100%)',
-    image: HERO_IMAGES.SLIDE_2,
-    fallback: PLACEHOLDER_IMAGES.SECURITY,
+    gradient: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)',
     cta: {
-      primary: { text: 'Get Protected', link: '/services' },
+      primary: { text: 'Our Services', link: '/services' },
       secondary: { text: 'Contact Us', link: '/contact' }
     }
   },
   {
-    id: 3,
-    title: 'Trained & Verified Personnel',
-    subtitle: 'Background Checked • HSE Compliant',
-    description: 'Every guard undergoes rigorous training and verification',
-    icon: <FaCheckCircle />,
-    gradient: 'linear-gradient(135deg, rgba(0, 170, 85, 0.85) 0%, rgba(0, 136, 68, 0.85) 100%)',
-    image: HERO_IMAGES.SLIDE_3,
-    fallback: PLACEHOLDER_IMAGES.GUARD,
+    image: '/images/javelin-site-2.jpg',
+    title: '24/7 Armed & Unarmed Guards',
+    subtitle: 'Elite Security Personnel at Your Service',
+    description: 'Professional guards available around the clock',
+    icon: <FaUserShield />,
+    gradient: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)',
     cta: {
-      primary: { text: 'Join Our Team', link: '/recruitment' },
+      primary: { text: 'View Our Sites', link: '/our-sites' },
       secondary: { text: 'Learn More', link: '/about' }
     }
   },
   {
-    id: 4,
-    title: 'Event Security Excellence',
-    subtitle: 'Crowd Control • Access Management',
-    description: 'Professional security teams for events of any size',
+    image: '/images/javelin-site-3.jpg',
+    title: 'Advanced K-9 Security Units',
+    subtitle: 'Specialized Canine Protection Services',
+    description: 'Elite K-9 units for enhanced security operations',
+    icon: <FaCheckCircle />,
+    gradient: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)',
+    cta: {
+      primary: { text: 'Learn More', link: '/services' },
+      secondary: { text: 'Contact Us', link: '/contact' }
+    }
+  },
+  {
+    image: '/images/javelin-guard-4.jpg',
+    title: 'Trained Security Professionals',
+    subtitle: 'Expert Security Team Ready to Serve',
+    description: 'Highly trained professionals dedicated to your safety',
     icon: <FaBuilding />,
-    gradient: 'linear-gradient(135deg, rgba(0, 58, 103, 0.85) 0%, rgba(0, 102, 204, 0.85) 100%)',
-    image: HERO_IMAGES.SLIDE_4,
-    fallback: PLACEHOLDER_IMAGES.SECURITY,
+    gradient: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)',
     cta: {
-      primary: { text: 'Book Event Security', link: '/services' },
-      secondary: { text: 'View Services', link: '/services' }
+      primary: { text: 'Meet Our Team', link: '/team' },
+      secondary: { text: 'Our Services', link: '/services' }
     }
   },
   {
-    id: 5,
-    title: 'Advanced CCTV Monitoring',
-    subtitle: 'Smart Surveillance • Real-time Alerts',
-    description: '24/7 monitoring with cutting-edge technology',
-    icon: <FaVideo />,
-    gradient: 'linear-gradient(135deg, rgba(0, 32, 68, 0.85) 0%, rgba(0, 58, 103, 0.85) 100%)',
-    image: HERO_IMAGES.SLIDE_5,
-    fallback: PLACEHOLDER_IMAGES.SECURITY,
-    cta: {
-      primary: { text: 'Get Monitored', link: '/services' },
-      secondary: { text: 'See Technology', link: '/services' }
-    }
-  },
-  {
-    id: 6,
-    title: 'Mobile Patrol Services',
-    subtitle: 'Regular Patrols • Multiple Locations',
-    description: 'Constant vigilance across your facilities',
+    image: '/images/javelin-logo-2.jpg',
+    title: 'Professional K-9 Handlers',
+    subtitle: 'Elite Canine Security Operations',
+    description: 'Expert handlers with specialized K-9 training',
     icon: <FaCar />,
-    gradient: 'linear-gradient(135deg, rgba(0, 170, 85, 0.85) 0%, rgba(0, 136, 68, 0.85) 100%)',
-    image: HERO_IMAGES.SLIDE_6,
-    fallback: PLACEHOLDER_IMAGES.SECURITY,
+    gradient: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)',
     cta: {
-      primary: { text: 'Schedule Patrol', link: '/services' },
+      primary: { text: 'Contact Us', link: '/contact' },
+      secondary: { text: 'Our Services', link: '/services' }
+    }
+  },
+  {
+    image: '/images/javelin-site-5.jpg',
+    title: 'Javelin Associates Ltd',
+    subtitle: 'Your Trusted Security Partner Since Inception',
+    description: 'Delivering excellence in security services',
+    icon: <FaVideo />,
+    gradient: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)',
+    cta: {
+      primary: { text: 'About Us', link: '/about' },
       secondary: { text: 'Contact Us', link: '/contact' }
     }
   }
@@ -97,26 +86,6 @@ const HeroSlider = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [loadedImages, setLoadedImages] = useState(new Set());
   const [imageErrors, setImageErrors] = useState(new Set());
-
-  // Preload images with error handling
-  useEffect(() => {
-    slides.forEach((slide, index) => {
-      const img = new Image();
-      img.onload = () => {
-        setLoadedImages(prev => new Set([...prev, index]));
-      };
-      img.onerror = () => {
-        setImageErrors(prev => new Set([...prev, index]));
-        // Load fallback image
-        const fallbackImg = new Image();
-        fallbackImg.src = slide.fallback;
-        fallbackImg.onload = () => {
-          setLoadedImages(prev => new Set([...prev, index]));
-        };
-      };
-      img.src = slide.image;
-    });
-  }, []);
 
   const nextSlide = useCallback(() => {
     if (!isAnimating) {
@@ -133,6 +102,43 @@ const HeroSlider = () => {
       setTimeout(() => setIsAnimating(false), 600);
     }
   }, [isAnimating]);
+
+  useEffect(() => {
+    const preloaders = slides.map((slide, index) => {
+      const img = new Image();
+      img.src = slide.image;
+
+      img.onload = () => {
+        setLoadedImages((prev) => {
+          const next = new Set(prev);
+          next.add(index);
+          return next;
+        });
+      };
+
+      img.onerror = () => {
+        setImageErrors((prev) => {
+          const next = new Set(prev);
+          next.add(index);
+          return next;
+        });
+        setLoadedImages((prev) => {
+          const next = new Set(prev);
+          next.add(index);
+          return next;
+        });
+      };
+
+      return img;
+    });
+
+    return () => {
+      preloaders.forEach((img) => {
+        img.onload = null;
+        img.onerror = null;
+      });
+    };
+  }, []);
 
   useEffect(() => {
     if (!isPaused) {
@@ -161,15 +167,15 @@ const HeroSlider = () => {
       <div className="hero-slider__container">
         {slides.map((slide, index) => (
           <div
-            key={slide.id}
+            key={index}
             className={`hero-slide ${index === currentSlide ? 'hero-slide--active' : ''}`}
           >
             {/* Background Image with fallback */}
             <div 
               className="hero-slide__bg"
               style={{
-                backgroundImage: `url(${imageErrors.has(index) ? slide.fallback : slide.image})`,
-                opacity: loadedImages.has(index) ? 1 : 0
+                backgroundImage: `url(${imageErrors.has(index) ? FALLBACK_IMAGE : slide.image})`,
+                opacity: loadedImages.has(index) || imageErrors.has(index) ? 1 : 0
               }}
             />
             

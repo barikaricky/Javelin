@@ -14,12 +14,14 @@ import Contact from './pages/Contact';
 import News from './pages/News';
 import NewsDetail from './pages/NewsDetail';
 import Team from './pages/Team';
+import BookMeeting from './pages/BookMeeting';
 import NotFound from './pages/NotFound';
 
 // Admin imports
 import { AuthProvider } from './context/AuthContext';
 import {
   Login,
+  Register,
   AdminLayout,
   Dashboard,
   TeamManager,
@@ -28,6 +30,7 @@ import {
   NewsManager,
   MessagesManager,
   ContactInfoManager,
+  AppointmentsManager,
   ProtectedRoute
 } from './admin';
 
@@ -69,15 +72,18 @@ function App() {
               <Route path="/news" element={<News />} />
               <Route path="/news/:slug" element={<NewsDetail />} />
               <Route path="/team" element={<Team />} />
+              <Route path="/book-meeting" element={<BookMeeting />} />
               
               {/* Admin Routes */}
               <Route path="/admin/login" element={<Login />} />
+              <Route path="/admin/register" element={<Register />} />
               <Route path="/admin" element={
                 <ProtectedRoute>
                   <AdminLayout />
                 </ProtectedRoute>
               }>
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="appointments" element={<AppointmentsManager />} />
                 <Route path="team" element={<TeamManager />} />
                 <Route path="sites" element={<SitesManager />} />
                 <Route path="gallery" element={<GalleryManager />} />

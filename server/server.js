@@ -52,6 +52,7 @@ app.use('/api/news', require('./routes/newsRoutes'));
 app.use('/api/contact', require('./routes/newContactRoutes'));
 app.use('/api/applications', require('./routes/applicationRoutes'));
 app.use('/api/services', require('./routes/serviceRoutes'));
+app.use('/api/appointments', require('./routes/appointmentRoutes'));
 
 // Error Handler
 app.use(errorHandler);

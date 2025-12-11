@@ -78,17 +78,16 @@ const getTeamMember = async (req, res) => {
 const createTeamMember = async (req, res) => {
   try {
     const { name, position, bio, socialLinks, order, isActive } = req.body;
-    
-    // Handle image upload
-    if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please upload an image'
-      });
+
+    const defaultImage = process.env.DEFAULT_TEAM_IMAGE || '/assets/images/placeholders/guard-placeholder.jpg';
+
+    let image = defaultImage;
+    let imagePublicId = null;
+
+    if (req.file) {
+      image = getImageUrl(req.file);
+      imagePublicId = req.file.filename || req.file.public_id;
     }
-    
-    const image = getImageUrl(req.file);
-    const imagePublicId = req.file.filename || req.file.public_id;
     
     // Parse socialLinks if it's a string
     let parsedSocialLinks = socialLinks;
@@ -99,6 +98,8 @@ const createTeamMember = async (req, res) => {
         parsedSocialLinks = {};
       }
     }
+    
+    parsedSocialLinks = parsedSocialLinks || {};
     
     const teamMember = await TeamMember.create({
       name,

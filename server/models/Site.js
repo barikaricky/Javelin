@@ -18,7 +18,7 @@ const siteSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'Image is required']
+    default: () => process.env.DEFAULT_SITE_IMAGE || '/assets/images/placeholders/security-placeholder.jpg'
   },
   imagePublicId: {
     type: String // Cloudinary public ID for deletion

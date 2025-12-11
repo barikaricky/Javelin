@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { galleryAPI } from '../services/api';
 import { FiPlus, FiEdit2, FiTrash2, FiX, FiImage, FiFilter } from 'react-icons/fi';
+import { buildImageUrl } from '../utils/imageHelper';
 import './Manager.css';
 
 const GalleryManager = () => {
@@ -36,7 +37,12 @@ const GalleryManager = () => {
   const fetchGalleryItems = async () => {
     try {
       const response = await galleryAPI.getAllAdmin();
-      setGalleryItems(response.data.data);
+      const raw = response.data?.data || [];
+      const normalized = raw.map((item) => ({
+        ...item,
+        image: buildImageUrl(item.image),
+      }));
+      setGalleryItems(normalized);
     } catch (error) {
       console.error('Error fetching gallery items:', error);
       setError('Failed to load gallery items');
@@ -87,7 +93,7 @@ const GalleryManager = () => {
       order: item.order || 0,
       isActive: item.isActive
     });
-    setImagePreview(item.image);
+    setImagePreview(buildImageUrl(item.image));
     setShowModal(true);
   };
 
@@ -180,7 +186,13 @@ const GalleryManager = () => {
           filteredItems.map((item) => (
             <div key={item._id} className={`item-card ${!item.isActive ? 'inactive' : ''}`}>
               <div className="item-image">
-                <img src={item.image} alt={item.title} onError={(e) => e.target.src = '/assets/images/placeholder.jpg'} />
+                <img
+                  src={buildImageUrl(item.image)}
+                  alt={item.title}
+                  onError={(e) => {
+                    e.target.src = '/assets/images/placeholder.jpg';
+                  }}
+                />
                 {!item.isActive && <span className="inactive-badge">Inactive</span>}
               </div>
               <div className="item-content">

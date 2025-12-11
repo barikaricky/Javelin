@@ -86,6 +86,23 @@
   cursor: not-allowed;
 }
 
+.register-link {
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: 1.5rem;
+}
+
+.register-link a {
+  color: #003A67;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
 .error-message {
   background: #fee;
   color: #c00;

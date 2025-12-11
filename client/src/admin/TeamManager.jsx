@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { teamAPI } from '../services/api';
-import { FiPlus, FiEdit2, FiTrash2, FiX, FiCheck, FiImage } from 'react-icons/fi';
+import { FiPlus, FiEdit2, FiTrash2, FiX, FiImage } from 'react-icons/fi';
+import { buildImageUrl } from '../utils/imageHelper';
 import './Manager.css';
 
 const TeamManager = () => {
@@ -33,7 +34,12 @@ const TeamManager = () => {
   const fetchTeamMembers = async () => {
     try {
       const response = await teamAPI.getAllAdmin();
-      setTeamMembers(response.data.data);
+      const raw = response.data?.data || [];
+      const normalized = raw.map((member) => ({
+        ...member,
+        image: buildImageUrl(member.image),
+      }));
+      setTeamMembers(normalized);
     } catch (error) {
       console.error('Error fetching team members:', error);
       setError('Failed to load team members');
@@ -97,7 +103,7 @@ const TeamManager = () => {
       order: member.order || 0,
       isActive: member.isActive
     });
-    setImagePreview(member.image);
+    setImagePreview(buildImageUrl(member.image));
     setShowModal(true);
   };
 
@@ -176,7 +182,13 @@ const TeamManager = () => {
           teamMembers.map((member) => (
             <div key={member._id} className={`item-card ${!member.isActive ? 'inactive' : ''}`}>
               <div className="item-image">
-                <img src={member.image} alt={member.name} onError={(e) => e.target.src = '/assets/images/placeholder.jpg'} />
+                <img
+                  src={buildImageUrl(member.image)}
+                  alt={member.name}
+                  onError={(e) => {
+                    e.target.src = '/assets/images/placeholder.jpg';
+                  }}
+                />
                 {!member.isActive && <span className="inactive-badge">Inactive</span>}
               </div>
               <div className="item-content">

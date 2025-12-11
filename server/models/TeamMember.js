@@ -18,7 +18,7 @@ const teamMemberSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'Image is required']
+    default: () => process.env.DEFAULT_TEAM_IMAGE || '/assets/images/placeholders/guard-placeholder.jpg'
   },
   imagePublicId: {
     type: String // Cloudinary public ID for deletion

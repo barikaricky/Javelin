@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { newsAPI } from '../services/api';
 import { FiPlus, FiEdit2, FiTrash2, FiX, FiFileText, FiFilter, FiEye } from 'react-icons/fi';
+import { buildImageUrl } from '../utils/imageHelper';
 import './Manager.css';
 
 const NewsManager = () => {
@@ -43,7 +44,12 @@ const NewsManager = () => {
   const fetchNewsPosts = async () => {
     try {
       const response = await newsAPI.getAllAdmin();
-      setNewsPosts(response.data.data);
+      const raw = response.data?.data || [];
+      const normalized = raw.map((post) => ({
+        ...post,
+        featuredImage: buildImageUrl(post.featuredImage),
+      }));
+      setNewsPosts(normalized);
     } catch (error) {
       console.error('Error fetching news posts:', error);
       setError('Failed to load news posts');
@@ -93,7 +99,7 @@ const NewsManager = () => {
       featuredImage: null,
       status: post.status
     });
-    setImagePreview(post.featuredImage);
+    setImagePreview(buildImageUrl(post.featuredImage));
     setShowModal(true);
   };
 
@@ -205,7 +211,13 @@ const NewsManager = () => {
           filteredPosts.map((post) => (
             <div key={post._id} className={`item-card ${post.status === 'draft' ? 'draft' : ''}`}>
               <div className="item-image">
-                <img src={post.featuredImage} alt={post.title} onError={(e) => e.target.src = '/assets/images/placeholder.jpg'} />
+                <img
+                  src={buildImageUrl(post.featuredImage)}
+                  alt={post.title}
+                  onError={(e) => {
+                    e.target.src = '/assets/images/placeholder.jpg';
+                  }}
+                />
                 <span className={`status-badge ${post.status}`}>{post.status}</span>
               </div>
               <div className="item-content">

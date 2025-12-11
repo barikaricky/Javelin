@@ -78,17 +78,16 @@ const getSite = async (req, res) => {
 const createSite = async (req, res) => {
   try {
     const { name, location, description, services, coordinates, order, isActive } = req.body;
-    
-    // Handle image upload
-    if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please upload an image'
-      });
+
+    const defaultImage = process.env.DEFAULT_SITE_IMAGE || '/assets/images/placeholders/security-placeholder.jpg';
+
+    let image = defaultImage;
+    let imagePublicId = null;
+
+    if (req.file) {
+      image = getImageUrl(req.file);
+      imagePublicId = req.file.filename || req.file.public_id;
     }
-    
-    const image = getImageUrl(req.file);
-    const imagePublicId = req.file.filename || req.file.public_id;
     
     // Parse services if it's a string
     let parsedServices = services;
@@ -98,6 +97,10 @@ const createSite = async (req, res) => {
       } catch (e) {
         parsedServices = services.split(',').map(s => s.trim());
       }
+    }
+
+    if (Array.isArray(parsedServices)) {
+      parsedServices = parsedServices.filter(Boolean);
     }
     
     // Parse coordinates if it's a string
@@ -159,6 +162,10 @@ const updateSite = async (req, res) => {
       } catch (e) {
         updateData.services = updateData.services.split(',').map(s => s.trim());
       }
+    }
+
+    if (Array.isArray(updateData.services)) {
+      updateData.services = updateData.services.filter(Boolean);
     }
     
     // Parse coordinates if it's a string

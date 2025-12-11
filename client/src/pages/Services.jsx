@@ -46,7 +46,7 @@ const Services = () => {
         'CCTV monitoring',
         'Security team coordination'
       ],
-      price: '250,000',
+      price: '120,000',
       duration: 'per location/month',
       popular: true
     },
@@ -61,7 +61,7 @@ const Services = () => {
         'Package screening',
         'Visitor log management'
       ],
-      price: '150,000',
+      price: '120,000',
       duration: 'per residence/month',
       popular: false
     },
@@ -76,7 +76,7 @@ const Services = () => {
         'Entry/exit control',
         'Emergency evacuation planning'
       ],
-      price: '500,000',
+      price: '120,000',
       duration: 'per event',
       popular: false
     },
@@ -91,7 +91,7 @@ const Services = () => {
         'Motion detection alerts',
         'Cloud storage backup'
       ],
-      price: '180,000',
+      price: '12,000',
       duration: 'setup + monthly fee',
       popular: false
     },
@@ -106,7 +106,6 @@ const Services = () => {
         'Incident response',
         'GPS tracking'
       ],
-      price: '200,000',
       duration: 'per route/month',
       popular: true
     },
@@ -121,7 +120,7 @@ const Services = () => {
         'Visitor registration',
         'Integration with CCTV'
       ],
-      price: '300,000',
+      price: '120,000',
       duration: 'installation + monthly',
       popular: false
     },
@@ -151,7 +150,7 @@ const Services = () => {
         'Fire watch services',
         'Safety compliance'
       ],
-      price: '350,000',
+      price: '120,000',
       duration: 'per facility/month',
       popular: false
     },
@@ -166,7 +165,7 @@ const Services = () => {
         'Training programs',
         'Compliance review'
       ],
-      price: '450,000',
+      price: '150,000',
       duration: 'per project',
       popular: false
     }
@@ -250,7 +249,7 @@ const Services = () => {
                   ))}
                 </ul>
 
-                <Link to="/contact" className="btn btn-primary btn-block">
+                <Link to="/book-meeting" className="btn btn-primary btn-block">
                   Request Quote <FaArrowRight />
                 </Link>
               </div>
@@ -266,7 +265,7 @@ const Services = () => {
             <h2>Need a Custom Security Solution?</h2>
             <p>Contact us for a personalized quote tailored to your specific security needs</p>
             <div className="cta-buttons">
-              <Link to="/contact" className="btn btn-primary btn-lg">
+              <Link to="/book-meeting" className="btn btn-primary btn-lg">
                 Get Custom Quote
               </Link>
               <Link to="/recruitment" className="btn btn-outline btn-lg">

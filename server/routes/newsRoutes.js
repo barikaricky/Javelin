@@ -17,12 +17,14 @@ const { upload } = require('../middleware/uploadMiddleware');
 router.get('/', getNewsPosts);
 router.get('/categories', getCategories);
 router.get('/slug/:slug', getNewsPostBySlug);
-router.get('/:id', getNewsPost);
 
-// Admin routes
+// Admin routes (must come before parameterized :id route)
 router.get('/admin/all', protect, admin, getAllNewsPosts);
 router.post('/', protect, admin, upload.single('featuredImage'), createNewsPost);
 router.put('/:id', protect, admin, upload.single('featuredImage'), updateNewsPost);
 router.delete('/:id', protect, admin, deleteNewsPost);
+
+// Parameterized route last
+router.get('/:id', getNewsPost);
 
 module.exports = router;

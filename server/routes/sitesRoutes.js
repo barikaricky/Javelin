@@ -13,12 +13,14 @@ const { upload } = require('../middleware/uploadMiddleware');
 
 // Public routes
 router.get('/', getSites);
-router.get('/:id', getSite);
 
-// Admin routes
+// Admin routes (must precede parameterized handlers)
 router.get('/admin/all', protect, admin, getAllSites);
 router.post('/', protect, admin, upload.single('image'), createSite);
 router.put('/:id', protect, admin, upload.single('image'), updateSite);
 router.delete('/:id', protect, admin, deleteSite);
+
+// Parameterized route last to prevent conflicts
+router.get('/:id', getSite);
 
 module.exports = router;

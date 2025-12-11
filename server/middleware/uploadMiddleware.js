@@ -1,6 +1,20 @@
+const fs = require('fs');
+const path = require('path');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+const uploadsDir = path.join(__dirname, '..', 'uploads');
+
+if (!process.env.CLOUDINARY_CLOUD_NAME) {
+  try {
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+  } catch (error) {
+    console.error('Unable to create uploads directory:', error.message);
+  }
+}
 
 // Configure Cloudinary
 cloudinary.config({
@@ -22,7 +36,7 @@ const cloudinaryStorage = new CloudinaryStorage({
 // Local storage fallback
 const localStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, uploadsDir);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);

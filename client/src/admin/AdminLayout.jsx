@@ -11,7 +11,8 @@ import {
   FiSettings,
   FiLogOut,
   FiMenu,
-  FiX
+  FiX,
+  FiCalendar
 } from 'react-icons/fi';
 import './AdminLayout.css';
 
@@ -27,6 +28,7 @@ const AdminLayout = () => {
 
   const menuItems = [
     { path: '/admin/dashboard', icon: <FiHome />, label: 'Dashboard' },
+    { path: '/admin/appointments', icon: <FiCalendar />, label: 'Appointments' },
     { path: '/admin/team', icon: <FiUsers />, label: 'Leadership Team' },
     { path: '/admin/sites', icon: <FiMapPin />, label: 'Operational Sites' },
     { path: '/admin/gallery', icon: <FiImage />, label: 'Gallery' },

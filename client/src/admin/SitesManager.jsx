@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { sitesAPI } from '../services/api';
 import { FiPlus, FiEdit2, FiTrash2, FiX, FiMapPin } from 'react-icons/fi';
+import { buildImageUrl } from '../utils/imageHelper';
 import './Manager.css';
 
 const SitesManager = () => {
@@ -28,7 +29,12 @@ const SitesManager = () => {
   const fetchSites = async () => {
     try {
       const response = await sitesAPI.getAllAdmin();
-      setSites(response.data.data);
+      const raw = response.data?.data || [];
+      const normalized = raw.map((site) => ({
+        ...site,
+        image: buildImageUrl(site.image),
+      }));
+      setSites(normalized);
     } catch (error) {
       console.error('Error fetching sites:', error);
       setError('Failed to load sites');
@@ -81,7 +87,7 @@ const SitesManager = () => {
       order: site.order || 0,
       isActive: site.isActive
     });
-    setImagePreview(site.image);
+    setImagePreview(buildImageUrl(site.image));
     setShowModal(true);
   };
 
@@ -160,7 +166,13 @@ const SitesManager = () => {
           sites.map((site) => (
             <div key={site._id} className={`item-card ${!site.isActive ? 'inactive' : ''}`}>
               <div className="item-image">
-                <img src={site.image} alt={site.name} onError={(e) => e.target.src = '/assets/images/placeholder.jpg'} />
+                <img
+                  src={buildImageUrl(site.image)}
+                  alt={site.name}
+                  onError={(e) => {
+                    e.target.src = '/assets/images/placeholder.jpg';
+                  }}
+                />
                 {!site.isActive && <span className="inactive-badge">Inactive</span>}
               </div>
               <div className="item-content">
