@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-d
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import CookieConsent from './components/common/CookieConsent';
+import AssistantWidget from './components/common/AssistantWidget';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -47,6 +48,7 @@ const Layout = ({ children }) => {
       <Header />
       <main>{children}</main>
       <Footer />
+      <AssistantWidget />
       <CookieConsent />
     </>
   );
