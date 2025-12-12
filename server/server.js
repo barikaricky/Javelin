@@ -7,33 +7,16 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
-// Middleware - CORS Configuration
-app.use(cors({
-  origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, postman)
-    if (!origin) return callback(null, true);
-    
-    // List of allowed origins
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:5000',
-      'https://v9hw7bw6-3000.uks1.devtunnels.ms',
-      'javelinassociates.netlify.app',
-      'https://javelinassociates.org',
-      process.env.CLIENT_URL
-    ].filter(Boolean);
-    
-    // Check if origin is allowed or use wildcard for dev tunnels
-    if (allowedOrigins.indexOf(origin) !== -1 || origin.includes('devtunnels.ms')) {
-      callback(null, true);
-    } else {
-      callback(null, true); // Allow all origins in development
-    }
-  },
-  credentials: true,
+// Configure CORS options
+const corsOptions = {
+  origin: ['https://www.javelinassociates.org', 'http://localhost:3000'], // Add your frontend domain here
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
