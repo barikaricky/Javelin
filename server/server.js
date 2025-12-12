@@ -12,6 +12,7 @@ const corsOptions = {
   origin: [
     'https://www.javelinassociates.org',
     'https://javelinassociates.org',
+    'https://javelinassocaites.netlify.app',
     'http://localhost:3000',
     'http://localhost:5000'
   ],
