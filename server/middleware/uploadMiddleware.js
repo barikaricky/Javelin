@@ -5,8 +5,9 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const uploadsDir = path.join(__dirname, '..', 'uploads');
+const isServerlessEnv = process.env.NETLIFY === 'true' || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
 
-if (!process.env.CLOUDINARY_CLOUD_NAME) {
+if (!process.env.CLOUDINARY_CLOUD_NAME && !isServerlessEnv) {
   try {
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
@@ -57,7 +58,11 @@ const fileFilter = (req, file, cb) => {
 };
 
 // Choose storage based on environment
-const storage = process.env.CLOUDINARY_CLOUD_NAME ? cloudinaryStorage : localStorage;
+const storage = process.env.CLOUDINARY_CLOUD_NAME
+  ? cloudinaryStorage
+  : isServerlessEnv
+    ? multer.memoryStorage()
+    : localStorage;
 
 // Multer upload middleware
 const upload = multer({
@@ -84,12 +89,25 @@ const deleteImage = async (publicId) => {
 
 // Helper function to get image URL from upload result
 const getImageUrl = (file) => {
+  if (!file) return null;
+
   if (file.path) {
     // Cloudinary returns path with full URL
     return file.path;
   }
-  // Local storage returns filename
-  return `/uploads/${file.filename}`;
+
+  if (file.buffer) {
+    // Netlify/Serverless fallback: embed as Base64 data URL
+    const base64 = file.buffer.toString('base64');
+    return `data:${file.mimetype};base64,${base64}`;
+  }
+
+  if (file.filename) {
+    // Local storage returns filename
+    return `/uploads/${file.filename}`;
+  }
+
+  return null;
 };
 
 // Helper to get public ID from Cloudinary URL
