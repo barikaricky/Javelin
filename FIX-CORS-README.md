@@ -15,6 +15,8 @@ We have updated the backend configuration to explicitly allow requests from your
    deploy-backend-fix.bat
    ```
 
+   This runs `netlify deploy --prod --dir server/public --functions server/netlify/functions` so the function bundle is definitely published.
+
 2. Wait 1-2 minutes for the deployment to propagate.
 
 3. Clear your browser cache or try in an Incognito window.
@@ -31,4 +33,4 @@ We have updated the backend configuration to explicitly allow requests from your
 If you still see CORS errors:
 - Check the Netlify function logs in your Netlify Dashboard.
 - Ensure the backend URL in your frontend matches the deployed Netlify URL (`https://javelinassocaite.netlify.app`).
-- Confirm that the Netlify deployment completed successfully and you are not looking at an older build.
+- Confirm that the Netlify deployment completed successfully and you are not looking at an older build. The CLI output should list the Site URL and Functions URL.
