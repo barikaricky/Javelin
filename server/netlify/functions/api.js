@@ -60,4 +60,41 @@ app.use('/api/appointments', require('../../routes/appointmentRoutes'));
 // Error handler
 app.use(errorHandler);
 
-module.exports.handler = serverless(app);
+const serverlessHandler = serverless(app);
+const allowedOrigins = corsOptions.origin;
+
+module.exports.handler = async (event, context) => {
+  const requestOrigin = event.headers?.origin || event.headers?.Origin;
+  const normalizedOrigin = requestOrigin && allowedOrigins.includes(requestOrigin)
+    ? requestOrigin
+    : allowedOrigins[0];
+
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 204,
+      headers: {
+        'Access-Control-Allow-Origin': normalizedOrigin,
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS'
+      },
+      body: ''
+    };
+  }
+
+  const response = await serverlessHandler(event, context);
+  const headers = response.headers ? { ...response.headers } : {};
+
+  headers['Access-Control-Allow-Origin'] = normalizedOrigin;
+  headers['Access-Control-Allow-Credentials'] = 'true';
+  headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
+  headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS';
+
+  response.headers = headers;
+
+  if (response.multiValueHeaders) {
+    response.multiValueHeaders['Access-Control-Allow-Origin'] = [normalizedOrigin];
+  }
+
+  return response;
+};

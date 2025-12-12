@@ -19,10 +19,16 @@ We have updated the backend configuration to explicitly allow requests from your
 
 3. Clear your browser cache or try in an Incognito window.
 
-4. Attempt to login or register on `https://www.javelinassociates.org/admin`.
+4. Verify the CORS header is present by running (optional):
+   ```bash
+   curl -I https://javelinassocaite.netlify.app/api/health
+   ```
+   Ensure the response includes `Access-Control-Allow-Origin: https://www.javelinassociates.org`.
+5. Attempt to login or register on `https://www.javelinassociates.org/admin`.
 
 ## Troubleshooting
 
 If you still see CORS errors:
 - Check the Netlify function logs in your Netlify Dashboard.
 - Ensure the backend URL in your frontend matches the deployed Netlify URL (`https://javelinassocaite.netlify.app`).
+- Confirm that the Netlify deployment completed successfully and you are not looking at an older build.
