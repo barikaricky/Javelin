@@ -61,13 +61,12 @@ app.use('/api/appointments', require('../../routes/appointmentRoutes'));
 app.use(errorHandler);
 
 const serverlessHandler = serverless(app);
-const allowedOrigins = corsOptions.origin;
+const defaultOrigin = corsOptions.origin[0];
 
 module.exports.handler = async (event, context) => {
-  const requestOrigin = event.headers?.origin || event.headers?.Origin;
-  const normalizedOrigin = requestOrigin && allowedOrigins.includes(requestOrigin)
-    ? requestOrigin
-    : allowedOrigins[0];
+  const headers = event.headers || {};
+  const requestOrigin = headers.origin || headers.Origin;
+  const normalizedOrigin = requestOrigin || defaultOrigin;
 
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -76,21 +75,23 @@ module.exports.handler = async (event, context) => {
         'Access-Control-Allow-Origin': normalizedOrigin,
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS'
+        'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+        'Vary': 'Origin'
       },
       body: ''
     };
   }
 
   const response = await serverlessHandler(event, context);
-  const headers = response.headers ? { ...response.headers } : {};
+  const responseHeaders = response.headers ? { ...response.headers } : {};
 
-  headers['Access-Control-Allow-Origin'] = normalizedOrigin;
-  headers['Access-Control-Allow-Credentials'] = 'true';
-  headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
-  headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS';
+  responseHeaders['Access-Control-Allow-Origin'] = normalizedOrigin;
+  responseHeaders['Access-Control-Allow-Credentials'] = 'true';
+  responseHeaders['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
+  responseHeaders['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS';
+  responseHeaders['Vary'] = 'Origin';
 
-  response.headers = headers;
+  response.headers = responseHeaders;
 
   if (response.multiValueHeaders) {
     response.multiValueHeaders['Access-Control-Allow-Origin'] = [normalizedOrigin];
