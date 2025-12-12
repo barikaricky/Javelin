@@ -18,6 +18,8 @@ app.use(cors({
       'http://localhost:3000',
       'http://localhost:5000',
       'https://v9hw7bw6-3000.uks1.devtunnels.ms',
+      'javelinassociates.netlify.app',
+      'https://javelinassociates.org',
       process.env.CLIENT_URL
     ].filter(Boolean);
     

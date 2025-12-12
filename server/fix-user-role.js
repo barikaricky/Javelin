@@ -21,7 +21,7 @@ const fixUserRole = async () => {
 
     if (users.length === 0) {
       console.log('\n❌ No users found in database!');
-      console.log('Please register a user first at http://localhost:3000/admin/register');
+      console.log('Please register a user first at /adhttp://localhost:3000min/register');
       process.exit(0);
     }
 
