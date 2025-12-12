@@ -9,7 +9,12 @@ const app = express();
 
 // Configure CORS options
 const corsOptions = {
-  origin: ['https://www.javelinassociates.org', 'http://localhost:3000'], // Add your frontend domain here
+  origin: [
+    'https://www.javelinassociates.org',
+    'https://javelinassociates.org',
+    'http://localhost:3000',
+    'http://localhost:5000'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

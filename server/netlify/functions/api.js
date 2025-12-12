@@ -16,25 +16,24 @@ connectDB();
 const app = express();
 
 // CORS configuration
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-
-    const allowedOrigins = [
-      'https://javelinassociates.org',
-      'https://www.javelinassociates.org',
-      'http://localhost:3000',
-      'http://localhost:5000',
-      process.env.CLIENT_URL || 'https://javelinassociates.org'
-    ].filter(Boolean);
-
-    // Always allow - in production CORS errors won't block requests in Netlify
-    callback(null, true);
-  },
-  credentials: true,
+const corsOptions = {
+  origin: [
+    'https://www.javelinassociates.org',
+    'https://javelinassociates.org',
+    'http://localhost:3000',
+    'http://localhost:5000'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight requests explicitly
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
