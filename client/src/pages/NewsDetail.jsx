@@ -13,11 +13,27 @@ const NewsDetail = () => {
   const [relatedPosts, setRelatedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [readingProgress, setReadingProgress] = useState(0);
+  const [showTOC, setShowTOC] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     fetchPost();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+      const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+      setReadingProgress(Math.min(progress, 100));
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const fetchPost = async () => {
     try {
@@ -86,6 +102,42 @@ const NewsDetail = () => {
     window.open(shareUrls[platform], '_blank', 'width=600,height=400');
   };
 
+  const generateTableOfContents = (content) => {
+    const lines = content.split('\n').filter(line => line.trim());
+    const headings = [];
+    let headingCount = 0;
+    
+    lines.forEach((line, index) => {
+      if (line.length > 20 && line.length < 100 && !line.includes('.') && index < lines.length / 2) {
+        headingCount++;
+        headings.push({
+          id: `section-${headingCount}`,
+          text: line,
+          level: 2
+        });
+      }
+    });
+    
+    return headings.slice(0, 6);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const handleBookmark = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: post.title,
+        url: window.location.href
+      }).catch(() => {});
+    } else {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url);
+      alert('Article link copied to clipboard!');
+    }
+  };
+
   if (loading) {
     return (
       <div className="news-detail-page">
@@ -142,8 +194,40 @@ const NewsDetail = () => {
         </div>
 
         <div className="container">
+          {/* Reading Progress Bar */}
+          <div className="reading-progress-bar" style={{ width: `${readingProgress}%` }} />
+
           <div className="article-layout">
             <div className="article-main">
+              {/* Article Tools */}
+              <div className="article-tools">
+                <button className="tool-btn" onClick={handlePrint} title="Print Article">
+                  <FiArrowLeft style={{ transform: 'rotate(-90deg)' }} /> Print
+                </button>
+                <button className="tool-btn" onClick={handleBookmark} title="Share Article">
+                  <FiShare2 /> Share
+                </button>
+                {calculateReadingTime(post.content) > 5 && (
+                  <button className="tool-btn" onClick={() => setShowTOC(!showTOC)} title="Table of Contents">
+                    📑 Contents
+                  </button>
+                )}
+              </div>
+
+              {/* Table of Contents for long articles */}
+              {showTOC && calculateReadingTime(post.content) > 5 && (
+                <div className="table-of-contents">
+                  <h3>Table of Contents</h3>
+                  <ul>
+                    {generateTableOfContents(post.content).map((heading, index) => (
+                      <li key={index}>
+                        <a href={`#${heading.id}`}>{heading.text}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               <div className="article-content">
                 {post.excerpt && (
                   <p className="article-excerpt">{post.excerpt}</p>
@@ -164,6 +248,22 @@ const NewsDetail = () => {
                 )}
               </div>
 
+              {/* Author Bio */}
+              {post.author && (
+                <div className="author-bio">
+                  <div className="author-avatar">
+                    <FiUser />
+                  </div>
+                  <div className="author-info">
+                    <h4>About the Author</h4>
+                    <h3>{post.author.name || 'Javelin Associates Team'}</h3>
+                    <p>
+                      {post.author.bio || `Security expert at Javelin Associates Ltd, Nigeria's leading security company. Specialized in providing insights on security best practices, industry trends, and safety solutions for businesses across Rivers State and Nigeria.`}
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* Share Section */}
               <div className="article-share">
                 <h3><FiShare2 /> Share This Article</h3>
@@ -183,10 +283,33 @@ const NewsDetail = () => {
                 </div>
               </div>
 
+              {/* Comments Section */}
+              <div className="comments-section">
+                <h3>💬 Join the Discussion</h3>
+                <p className="comments-info">
+                  Share your thoughts, ask questions, or discuss security topics with our community.
+                </p>
+                <div className="comments-placeholder">
+                  <div className="comment-cta">
+                    <h4>Want to share your thoughts?</h4>
+                    <p>Contact our team to discuss security solutions or share your insights</p>
+                    <Link to="/contact" className="btn btn-primary">
+                      Contact Our Security Experts
+                    </Link>
+                  </div>
+                  <div className="comment-notice">
+                    <p>
+                      <strong>Note:</strong> For immediate security concerns or consultations, 
+                      please call us directly at <strong>08103323437</strong> or <strong>09153542986</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* Related Posts */}
               {relatedPosts.length > 0 && (
                 <div className="related-posts">
-                  <h3>Related Articles</h3>
+                  <h3>📚 Related Articles</h3>
                   <div className="related-grid">
                     {relatedPosts.map(related => (
                       <Link 
@@ -222,30 +345,74 @@ const NewsDetail = () => {
             <aside className="article-sidebar">
               {/* Newsletter Signup */}
               <div className="sidebar-card newsletter-card">
-                <h3>Stay Informed</h3>
-                <p>Subscribe to our newsletter for security tips and updates</p>
-                <form className="newsletter-form">
-                  <input type="email" placeholder="Your email address" required />
-                  <button type="submit" className="btn btn-primary">Subscribe</button>
+                <div className="newsletter-icon">📧</div>
+                <h3>Stay Security-Savvy</h3>
+                <p>Get expert security tips, industry insights, and exclusive updates delivered to your inbox</p>
+                <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    required 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  />
+                  <button type="submit" className="btn btn-primary">
+                    Subscribe Now
+                  </button>
                 </form>
+                <p className="newsletter-note">Join 500+ security professionals. Unsubscribe anytime.</p>
+              </div>
+
+              {/* Quick Stats */}
+              <div className="sidebar-card stats-card">
+                <h3>📊 Why Choose Us</h3>
+                <div className="stat-item">
+                  <strong>15+</strong>
+                  <span>Years Experience</span>
+                </div>
+                <div className="stat-item">
+                  <strong>24/7</strong>
+                  <span>Availability</span>
+                </div>
+                <div className="stat-item">
+                  <strong>500+</strong>
+                  <span>Satisfied Clients</span>
+                </div>
+                <div className="stat-item">
+                  <strong>100%</strong>
+                  <span>Licensed & Insured</span>
+                </div>
               </div>
 
               {/* Categories */}
               <div className="sidebar-card">
-                <h3>Categories</h3>
+                <h3>📑 Browse Topics</h3>
                 <ul className="category-list">
-                  <li><Link to="/news?category=news">News</Link></li>
-                  <li><Link to="/news?category=blog">Blog</Link></li>
-                  <li><Link to="/news?category=announcement">Announcements</Link></li>
-                  <li><Link to="/news?category=press-release">Press Releases</Link></li>
+                  <li><Link to="/news?category=news">📰 Security News</Link></li>
+                  <li><Link to="/news?category=blog">✍️ Expert Blog</Link></li>
+                  <li><Link to="/news?category=announcement">📢 Announcements</Link></li>
+                  <li><Link to="/news?category=press-release">📄 Press Releases</Link></li>
                 </ul>
               </div>
 
               {/* CTA Card */}
               <div className="sidebar-card cta-card">
-                <h3>Need Security Services?</h3>
-                <p>Contact us for a free consultation</p>
-                <Link to="/contact" className="btn btn-primary btn-block">Get Quote</Link>
+                <h3>🛡️ Secure Your Business Today</h3>
+                <p>Professional security solutions tailored to your needs in Port Harcourt and across Nigeria</p>
+                <div className="cta-buttons">
+                  <Link to="/contact" className="btn btn-primary btn-block">Get Free Quote</Link>
+                  <a href="tel:+2348103323437" className="btn btn-outline btn-block">📞 Call Now</a>
+                </div>
+              </div>
+
+              {/* Popular Services */}
+              <div className="sidebar-card">
+                <h3>🔥 Popular Services</h3>
+                <ul className="services-list">
+                  <li><Link to="/services#armed-guards">Armed Security Guards</Link></li>
+                  <li><Link to="/services#k9-units">K-9 Security Units</Link></li>
+                  <li><Link to="/services#cctv">CCTV Surveillance</Link></li>
+                  <li><Link to="/services#mobile-patrol">Mobile Patrol</Link></li>
+                </ul>
               </div>
             </aside>
           </div>
