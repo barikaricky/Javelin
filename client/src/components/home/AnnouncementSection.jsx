@@ -17,7 +17,7 @@ const AnnouncementSection = () => {
     fallbackImage: PLACEHOLDER_IMAGES.GUARD,
     badge: 'Limited Positions',
     cta: {
-      text: 'Apply Now',
+      text: 'JOIN NOW',
       link: '/recruitment'
     },
     discount: '20% OFF',

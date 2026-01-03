@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import CookieConsent from './components/common/CookieConsent';
@@ -56,48 +57,50 @@ const Layout = ({ children }) => {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="App">
-          <Layout>
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/sites" element={<OurSites />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/recruitment" element={<Recruitment />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/news/:slug" element={<NewsDetail />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/book-meeting" element={<BookMeeting />} />
-              
-              {/* Admin Routes */}
-              <Route path="/admin/login" element={<Login />} />
-              <Route path="/admin/register" element={<Register />} />
-              <Route path="/admin" element={
-                <ProtectedRoute>
-                  <AdminLayout />
-                </ProtectedRoute>
-              }>
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="appointments" element={<AppointmentsManager />} />
-                <Route path="team" element={<TeamManager />} />
-                <Route path="sites" element={<SitesManager />} />
-                <Route path="gallery" element={<GalleryManager />} />
-                <Route path="news" element={<NewsManager />} />
-                <Route path="messages" element={<MessagesManager />} />
-                <Route path="contact-info" element={<ContactInfoManager />} />
-              </Route>
-              
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </div>
-      </Router>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <Router>
+          <div className="App">
+            <Layout>
+              <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/sites" element={<OurSites />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/recruitment" element={<Recruitment />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/news" element={<News />} />
+                <Route path="/news/:slug" element={<NewsDetail />} />
+                <Route path="/team" element={<Team />} />
+                <Route path="/book-meeting" element={<BookMeeting />} />
+                
+                {/* Admin Routes */}
+                <Route path="/admin/login" element={<Login />} />
+                <Route path="/admin/register" element={<Register />} />
+                <Route path="/admin" element={
+                  <ProtectedRoute>
+                    <AdminLayout />
+                  </ProtectedRoute>
+                }>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="appointments" element={<AppointmentsManager />} />
+                  <Route path="team" element={<TeamManager />} />
+                  <Route path="sites" element={<SitesManager />} />
+                  <Route path="gallery" element={<GalleryManager />} />
+                  <Route path="news" element={<NewsManager />} />
+                  <Route path="messages" element={<MessagesManager />} />
+                  <Route path="contact-info" element={<ContactInfoManager />} />
+                </Route>
+                
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </div>
+        </Router>
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 

@@ -4,9 +4,9 @@
 }
 
 .section-header {
-  text-align: center;
+  text-align: left;
   max-width: 700px;
-  margin: 0 auto 3rem;
+  margin: 0 0 3rem 0;
 }
 
 .section-header h2 {

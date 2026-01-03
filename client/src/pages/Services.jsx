@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import { 
   FaUserShield, 
   FaBuilding, 
@@ -188,7 +189,13 @@ const Services = () => {
 
   return (
     <div className="services-page">
-      {/* Hero Section */}
+      <SEO 
+        title="Security Services in Rivers State, Nigeria - Armed Guards, K-9 Units, CCTV Surveillance"
+        description="Comprehensive security services in Port Harcourt and Rivers State: Armed security guards, unarmed personnel, K-9 units, CCTV installation, mobile patrol, event security, corporate security, and residential protection. Professional, licensed, and affordable security solutions."
+        keywords="armed security guards Nigeria, unarmed security guards, K-9 security services Nigeria, CCTV installation Port Harcourt, mobile patrol services, event security Nigeria, corporate security Rivers State, residential security Nigeria, security guard services, bodyguard services, access control Nigeria, security company services"
+        url="/#/services"
+      />
+      {/* Hero Section */}}
       <section className="services-hero">
         <div className="container">
           <h1>Our Security Services</h1>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaFax } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
 import { contactAPI } from '../../services/api';
 import './ContactInfo.css';
 
@@ -12,26 +12,20 @@ const ContactInfo = () => {
     {
       icon: <FaMapMarkerAlt />,
       title: 'Head Office',
-      content: '123 Security Boulevard, Victoria Island, Lagos, Nigeria',
+      content: 'No. 58 Aker Road, opposite Renew Empire Iwofe, Port Harcourt.',
       link: null
     },
     {
       icon: <FaPhone />,
       title: 'Phone Numbers',
-      content: '+234 801 234 5678\n+234 802 345 6789',
-      link: 'tel:+2348012345678'
+      content: '08103323437\n09153542986',
+      link: 'tel:08103323437'
     },
     {
       icon: <FaEnvelope />,
       title: 'Email Address',
       content: 'info@javelinassociates.com\nhr@javelinassociates.com',
       link: 'mailto:info@javelinassociates.com'
-    },
-    {
-      icon: <FaFax />,
-      title: 'Fax',
-      content: '+234 1 234 5678',
-      link: null
     },
     {
       icon: <FaClock />,
@@ -82,15 +76,9 @@ const ContactInfo = () => {
         link: contactData.emails?.[0] ? `mailto:${contactData.emails[0]}` : null
       },
       {
-        icon: <FaFax />,
-        title: 'Fax',
-        content: contactData.fax || fallbackContactDetails[3].content,
-        link: null
-      },
-      {
         icon: <FaClock />,
         title: 'Office Hours',
-        content: contactData.officeHours || fallbackContactDetails[4].content,
+        content: contactData.officeHours || fallbackContactDetails[3].content,
         link: null
       }
     ];

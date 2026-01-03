@@ -8,15 +8,30 @@ import './Header.css';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      // Update scrolled state for styling
+      setIsScrolled(currentScrollY > 50);
+      
+      // Show header when scrolling up or at top, hide when scrolling down
+      if (currentScrollY < lastScrollY || currentScrollY < 100) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+        setIsMenuOpen(false); // Close mobile menu when hiding
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,7 +42,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'header--scrolled' : ''} ${isVisible ? 'header--visible' : 'header--hidden'}`}>
       {/* Top Bar - Contact Info */}
       <div className="header__topbar">
         <div className="container">
@@ -44,7 +59,7 @@ const Header = () => {
             </div>
             <div className="header__cta">
               <Link to="/recruitment" className="btn btn-sm btn-yellow">
-                Apply Now
+                JOIN NOW
               </Link>
             </div>
           </div>
@@ -61,17 +76,10 @@ const Header = () => {
                 src={LOGO}
                 alt="Javelin Associates"
                 className="header__logo-img"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
-                }}
               />
-              <div className="header__logo-fallback">
-                <div className="header__logo-icon">J</div>
-                <div className="header__logo-text">
-                  <span className="header__logo-main">JAVELIN</span>
-                  <span className="header__logo-sub">ASSOCIATES LTD</span>
-                </div>
+              <div className="header__logo-text">
+                <span className="header__logo-main">JAVELIN</span>
+                <span className="header__logo-sub">ASSOCIATES</span>
               </div>
             </Link>
 

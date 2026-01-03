@@ -23,6 +23,14 @@ body {
   background-color: var(--bg-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-top: 130px; /* Space for fixed header */
+}
+
+/* Adjust padding for different screen sizes */
+@media (min-width: 768px) {
+  body {
+    padding-top: 150px;
+  }
 }
 
 /* Typography - Military Grade */
