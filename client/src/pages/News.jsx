@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import { newsAPI } from '../services/api';
 import { buildImageUrl } from '../utils/imageHelper';
-import { FiCalendar, FiEye, FiArrowRight } from 'react-icons/fi';
+import { FiCalendar, FiEye, FiArrowRight, FiSearch, FiClock } from 'react-icons/fi';
 import './News.css';
 
 const News = () => {
@@ -10,6 +11,8 @@ const News = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('latest');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -61,17 +64,83 @@ const News = () => {
     });
   };
 
+  const calculateReadingTime = (content) => {
+    const wordsPerMinute = 200;
+    const wordCount = content.split(/\s+/).length;
+    const minutes = Math.ceil(wordCount / wordsPerMinute);
+    return minutes;
+  };
+
+  const filteredAndSortedPosts = () => {
+    let filtered = posts;
+    
+    // Search filter
+    if (searchQuery) {
+      filtered = filtered.filter(post => 
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.content.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    // Sort
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'latest':
+          return new Date(b.publishedAt || b.createdAt) - new Date(a.publishedAt || a.createdAt);
+        case 'oldest':
+          return new Date(a.publishedAt || a.createdAt) - new Date(b.publishedAt || b.createdAt);
+        case 'popular':
+          return (b.views || 0) - (a.views || 0);
+        default:
+          return 0;
+      }
+    });
+    
+    return sorted;
+  };
+
+  const displayedPosts = filteredAndSortedPosts();
+
   return (
     <div className="news-page">
+      <SEO 
+        title="Security News & Blog - Expert Insights from Javelin Associates Nigeria"
+        description="Read the latest security news, industry insights, safety tips, and expert advice from Javelin Associates. Stay informed about security trends in Nigeria and Rivers State."
+        keywords="security news Nigeria, security blog, security tips Nigeria, security industry news, Port Harcourt security news, security insights, safety tips Nigeria, Javelin Associates blog"
+        url="/#/news"
+      />
       <section className="news-hero">
         <div className="container">
-          <h1>News & Blog</h1>
-          <p>Stay updated with the latest news, insights, and announcements from Javelin Security</p>
+          <h1>Security News & Expert Insights</h1>
+          <p>Stay updated with the latest security news, industry insights, and expert advice from Nigeria's leading security company</p>
         </div>
       </section>
 
       <section className="news-content">
         <div className="container">
+          {/* Search and Sort Bar */}
+          <div className="news-controls">
+            <div className="search-box">
+              <FiSearch className="search-icon" />
+              <input 
+                type="text" 
+                placeholder="Search articles..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <select 
+              className="sort-select" 
+              value={sortBy} 
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="latest">Latest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="popular">Most Popular</option>
+            </select>
+          </div>
+
           <div className="news-filters">
             {categories.map(cat => (
               <button
@@ -91,14 +160,22 @@ const News = () => {
             </div>
           ) : error ? (
             <div className="error-message">{error}</div>
-          ) : posts.length === 0 ? (
+          ) : displayedPosts.length === 0 ? (
             <div className="no-posts">
-              <p>No posts found</p>
+              <p>{searchQuery ? `No articles found for "${searchQuery}"` : 'No posts found'}</p>
+              {searchQuery && (
+                <button className="btn btn-primary" onClick={() => setSearchQuery('')}>
+                  Clear Search
+                </button>
+              )}
             </div>
           ) : (
             <>
+              <div className="posts-count">
+                <p>Showing {displayedPosts.length} {displayedPosts.length === 1 ? 'article' : 'articles'}</p>
+              </div>
               <div className="news-grid">
-                {posts.map(post => (
+                {displayedPosts.map(post => (
                   <article key={post._id} className="news-card">
                     <div className="news-card-image">
                       <img 
@@ -114,6 +191,7 @@ const News = () => {
                     <div className="news-card-content">
                       <div className="news-meta">
                         <span><FiCalendar /> {formatDate(post.publishedAt || post.createdAt)}</span>
+                        <span><FiClock /> {calculateReadingTime(post.content)} min read</span>
                         <span><FiEye /> {post.views || 0} views</span>
                       </div>
                       <h2>{post.title}</h2>
