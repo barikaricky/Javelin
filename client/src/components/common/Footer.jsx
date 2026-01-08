@@ -107,7 +107,7 @@ const Footer = () => {
               <div className="footer__contact">
                 <div className="footer__contact-item">
                   <FaMapMarkerAlt className="footer__contact-icon" />
-                  <span>123 Security Boulevard<br />Victoria Island, Lagos</span>
+                  <span> Address: No. 58 Aker Road, <br />Port Harcourt, Rivers State</span>
                 </div>
                 <div className="footer__contact-item">
                   <FaPhone className="footer__contact-icon" />
