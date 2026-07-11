@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // For Netlify: use relative /api paths that proxy to functions
 // For local dev: use http://localhost:5000/api
-const API_URL = process.env.REACT_APP_API_URL || 
-  (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
+const API_URL = process.env.REACT_APP_API_URL ||
+  (process.env.NODE_ENV === 'production' ? 'https://javelin-backend-u928.onrender.com/api' : 'http://localhost:5000/api');
 
 // Create axios instance
 const api = axios.create({

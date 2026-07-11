@@ -82,8 +82,7 @@ const Recruitment = () => {
       if (files.cv) submitData.append('cv', files.cv);
       if (files.idCard) submitData.append('idCard', files.idCard);
 
-      const apiUrl = process.env.REACT_APP_API_URL || 
-        (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
+      const apiUrl = process.env.REACT_APP_API_URL || 'https://javelin-backend-u928.onrender.com/api';
       const response = await axios.post(`${apiUrl}/applications`, submitData, {
         headers: {
           'Content-Type': 'multipart/form-data'

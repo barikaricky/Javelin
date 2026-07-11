@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './BookMeeting.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://javelin-backend-u928.onrender.com/api';
 
 const BookMeeting = () => {
   const [step, setStep] = useState(1);

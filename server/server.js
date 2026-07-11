@@ -12,7 +12,7 @@ const corsOptions = {
   origin: [
     'https://www.javelinassociates.org',
     'https://javelinassociates.org',
-    'https://javelin-ky8r.onrender.com',
+    'https://javelin-backend-u928.onrender.com',
     'http://localhost:3000',
     'http://localhost:5000'
   ],

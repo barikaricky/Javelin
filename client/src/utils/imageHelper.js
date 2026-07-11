@@ -1,6 +1,6 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL ? 
-  process.env.REACT_APP_API_URL.replace('/api', '') : 
-  (process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5000');
+const API_BASE_URL = process.env.REACT_APP_API_URL 
+  ? process.env.REACT_APP_API_URL.replace('/api', '') 
+  : 'https://javelin-backend-u928.onrender.com';
 
 /**
  * Convert whatever the backend stored (Windows path, relative path, etc.)

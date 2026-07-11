@@ -1,7 +1,5 @@
 const config = {
-  // Update this to the correct backend URL without typos
-  API_URL: 'https://javelinassociates.netlify.app/api', 
-  // ...existing code...
+  API_URL: process.env.REACT_APP_API_URL || 'https://javelin-backend-u928.onrender.com/api',
 };
 
 export default config;
