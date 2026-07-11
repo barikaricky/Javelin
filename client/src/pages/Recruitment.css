@@ -1,0 +1,270 @@
+.recruitment-page {
+  background-color: var(--color-gray-light);
+}
+
+/* Hero Section */
+.recruitment-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primary-blue), var(--color-blue-dark));
+  padding: 8rem 0 6rem;
+  text-align: center;
+  color: var(--color-white);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.recruitment-hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 58, 103, 0.3);
+  z-index: 1;
+}
+
+.recruitment-hero__content {
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.recruitment-hero__icon {
+  font-size: 5rem;
+  color: var(--color-primary-yellow);
+  margin-bottom: 2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.recruitment-hero h1 {
+  color: var(--color-white);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.recruitment-hero p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.recruitment-hero__badges {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Benefits Section */
+.recruitment-benefits {
+  padding: 5rem 0;
+  background-color: var(--color-white);
+}
+
+.benefits-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+.benefit-card {
+  background: linear-gradient(135deg, var(--color-white), var(--color-gray-light));
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  border-color: var(--color-primary-yellow);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.benefit-card__icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.benefit-card h3 {
+  color: var(--color-primary-blue);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.benefit-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Form Section */
+.recruitment-form-section {
+  padding: 5rem 0;
+}
+
+.recruitment-form-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--color-white);
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-xl);
+}
+
+.recruitment-form-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.recruitment-form-header h2 {
+  color: var(--color-primary-blue);
+  margin-bottom: 1rem;
+}
+
+.recruitment-form-header p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+.recruitment-form-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff3cd;
+  color: #856404;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+}
+
+.recruitment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.form-section {
+  border: 2px solid var(--color-gray-light);
+  border-radius: 12px;
+  padding: 2rem;
+  background: var(--color-gray-light);
+}
+
+.form-section-title {
+  color: var(--color-primary-blue);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--color-primary-yellow);
+}
+
+.form-row {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+/* Upload Cards */
+.upload-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.upload-card {
+  background: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px dashed var(--color-gray-medium);
+  transition: all 0.3s ease;
+}
+
+.upload-card:hover {
+  border-color: var(--color-primary-yellow);
+  box-shadow: var(--shadow-md);
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.upload-label:hover {
+  background: var(--color-gray-light);
+}
+
+.upload-icon {
+  font-size: 3rem;
+  color: var(--color-primary-blue);
+  margin-bottom: 1rem;
+}
+
+.upload-title {
+  display: block;
+  font-weight: 700;
+  color: var(--color-primary-blue);
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.upload-hint {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.upload-success {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #d4edda;
+  color: #155724;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .upload-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .recruitment-form-wrapper {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-section {
+    padding: 1.5rem;
+  }
+
+  .recruitment-hero {
+    padding: 5rem 0 4rem;
+    background-attachment: scroll;
+  }
+}

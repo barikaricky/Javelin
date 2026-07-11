@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: javelin-backend
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: mongodb+srv://sovereignagl026_db_user:wQDIgiF9MVMQCPrr@javelinas.toppupq.mongodb.net/
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        value: https://javelinassociates.org
+      - key: CLIENT_URL
+        value: https://javelinassociates.org
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: EMAIL_FROM
+        value: noreply@javelinassociates.com
+      - key: ADMIN_EMAIL
+        value: hr@javelinassociates.com

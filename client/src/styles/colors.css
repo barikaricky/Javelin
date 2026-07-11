@@ -1,0 +1,51 @@
+:root {
+  /* Primary Colors */
+  --color-primary-blue: #003A67;
+  --color-primary-yellow: #FFCC00;
+  
+  /* Secondary Colors */
+  --color-secondary-green: #00AA55;
+  
+  /* Neutral Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-gray-light: #F5F5F5;
+  --color-gray-medium: #CCCCCC;
+  --color-gray-dark: #333333;
+  
+  /* Accent Variations */
+  --color-blue-light: #0066CC;
+  --color-blue-dark: #002044;
+  --color-yellow-light: #FFD633;
+  --color-yellow-dark: #CC9900;
+  --color-green-light: #00CC66;
+  --color-green-dark: #008844;
+  
+  /* Semantic Colors */
+  --color-success: var(--color-secondary-green);
+  --color-warning: var(--color-primary-yellow);
+  --color-danger: #DC3545;
+  --color-info: var(--color-blue-light);
+  
+  /* Background Colors */
+  --bg-primary: var(--color-white);
+  --bg-secondary: var(--color-gray-light);
+  --bg-dark: var(--color-primary-blue);
+  --bg-accent: var(--color-primary-yellow);
+  
+  /* Text Colors */
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-gray-dark);
+  --text-light: var(--color-white);
+  --text-muted: #6C757D;
+  
+  /* Border Colors */
+  --border-color: var(--color-gray-medium);
+  --border-focus: var(--color-primary-yellow);
+  
+  /* Shadow Colors */
+  --shadow-sm: 0 2px 4px rgba(0, 58, 103, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 58, 103, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 58, 103, 0.2);
+  --shadow-xl: 0 12px 24px rgba(0, 58, 103, 0.25);
+}
