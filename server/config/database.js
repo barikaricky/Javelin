@@ -40,6 +40,13 @@ const connectDB = async () => {
     
     console.log('\n  Server will continue running but database operations will fail');
     console.log('  Fix the issue above and restart the server\n');
+
+    // In production, crash the process so Render restarts and shows a clear error
+    if (process.env.NODE_ENV === 'production') {
+      console.error('\n  FATAL: Cannot start server without a working MongoDB connection in production.');
+      process.exit(1);
+    }
+
     return false;
   }
 };
