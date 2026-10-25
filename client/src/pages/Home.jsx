@@ -28,16 +28,16 @@ const slides = [
     title: <>DISCIPLINED <em>PEOPLE.</em><br />RELIABLE COVER.</>,
     description: 'A local security partner focused on trained officers, clear procedures and dependable supervision.',
     background: 'two',
-    image: '/assets/images/images/guard1.jpg',
-    position: 'center 55%'
+    image: '/assets/images/images/guard2.jpg',
+    position: 'center 58%'
   },
   {
     eyebrow: 'Start with a free assessment',
     title: <>KNOW YOUR <em>RISKS.</em><br />PLAN YOUR RESPONSE.</>,
     description: 'We assess your site, identify vulnerabilities and recommend a practical security plan.',
     background: 'three',
-    image: '/assets/images/images/guard3..jpg',
-    position: 'center 58%'
+    image: '/assets/images/images/site2.jpg',
+    position: 'center 54%'
   },
   {
     eyebrow: 'People and K-9 units',
@@ -60,8 +60,8 @@ const slides = [
     title: <>WHEN IT <em>MATTERS,</em><br />WE RESPOND.</>,
     description: 'Around-the-clock supervision and local knowledge keep your security operation moving.',
     background: 'six',
-    image: '/assets/images/guards/corporate-security.jpg.jpg',
-    position: 'center 55%'
+    image: '/images/Expect-led.jpeg',
+    position: 'center 56%'
   }
 ];
 
@@ -193,7 +193,7 @@ const Home = () => {
             <div
               className={`landing-hero__background landing-hero__background--${slide.background}${activeSlide === index ? ' is-active' : ''}`}
               style={{
-                backgroundImage: `linear-gradient(100deg, rgb(4 7 15 / 58%) 0%, rgb(4 7 15 / 30%) 58%, rgb(4 7 15 / 16%) 100%), url("${slide.image}")`,
+                backgroundImage: `url("${slide.image}")`,
                 backgroundPosition: slide.position
               }}
               key={slide.background}

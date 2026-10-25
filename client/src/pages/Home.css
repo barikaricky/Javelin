@@ -229,6 +229,21 @@
   visibility: hidden;
 }
 
+.landing-hero__slide::before {
+  background: linear-gradient(
+    90deg,
+    rgb(4 7 15 / 88%) 0%,
+    rgb(4 7 15 / 78%) 30%,
+    rgb(4 7 15 / 46%) 48%,
+    rgb(4 7 15 / 12%) 64%,
+    transparent 76%
+  );
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
 .landing-hero__slide.is-active {
   opacity: 1;
   pointer-events: auto;
@@ -269,6 +284,8 @@
 
 .landing-hero__content {
   max-width: 760px;
+  position: relative;
+  z-index: 1;
 }
 
 .landing-hero__logo {
@@ -879,6 +896,16 @@
   .landing-hero__slide {
     padding-bottom: 110px;
     padding-top: 100px;
+  }
+
+  .landing-hero__slide::before {
+    background: linear-gradient(
+      90deg,
+      rgb(4 7 15 / 88%) 0%,
+      rgb(4 7 15 / 76%) 46%,
+      rgb(4 7 15 / 32%) 72%,
+      transparent 100%
+    );
   }
 
   .landing-hero h1 {

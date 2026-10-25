@@ -1,111 +1,408 @@
-/* =========================================
-   Monthly Flyer Popup - Premium Design
-   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap');
 
-.flyer-overlay {
+.monthly-offer-overlay {
+  align-items: center;
+  animation: monthly-offer-fade-in .45s ease both;
+  backdrop-filter: blur(8px);
+  background: rgb(3 8 15 / 72%);
+  display: grid;
+  inset: 0;
+  opacity: 1;
+  padding: 16px;
+  place-items: center;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(6px);
+  visibility: visible;
   z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  animation: flyer-fade-in 0.4s ease;
 }
 
-@keyframes flyer-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+@keyframes monthly-offer-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.flyer-popup {
+.monthly-offer-card {
+  --offer-ink: #fff;
+  --offer-navy: #0a1626;
+  --offer-steel: #16283d;
+  --offer-amber: #f2b01e;
+  background: linear-gradient(165deg, var(--offer-steel), var(--offer-navy) 75%);
+  border: 1px solid rgb(242 176 30 / 45%);
+  border-top: 4px solid var(--offer-amber);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+  color: var(--offer-ink);
+  font-family: Barlow, system-ui, sans-serif;
+  max-height: min(850px, calc(100dvh - 32px));
+  overflow: auto;
+  padding: 30px 28px 24px;
   position: relative;
-  max-width: 500px;
-  width: 100%;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 204, 0, 0.2);
-  animation: flyer-scale-in 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  background: #001a33;
+  text-align: center;
+  transform: translateY(40px);
+  width: min(470px, 100%);
+  animation: monthly-offer-pop .8s cubic-bezier(.2, 1.1, .3, 1) .1s forwards;
 }
 
-@keyframes flyer-scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.85) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.flyer-close {
+.monthly-offer-card::before {
+  animation: monthly-offer-scan 2.6s ease-in-out .9s 1;
+  background: linear-gradient(180deg, rgb(242 176 30 / 22%), transparent);
+  content: '';
+  height: 90px;
+  left: 0;
+  pointer-events: none;
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  font-size: 1.2rem;
-  display: flex;
+  right: 0;
+  top: 0;
+  transform: translateY(-100%);
+}
+
+@keyframes monthly-offer-pop {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes monthly-offer-scan {
+  to { transform: translateY(560px); }
+}
+
+.monthly-offer-close {
   align-items: center;
-  justify-content: center;
+  background: transparent;
+  border: 0;
+  color: var(--offer-ink);
   cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-  backdrop-filter: blur(4px);
+  display: flex;
+  font-size: 28px;
+  height: 38px;
+  justify-content: center;
+  opacity: .7;
+  padding: 0;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  transition: color .2s, opacity .2s;
+  width: 38px;
+  z-index: 2;
 }
 
-.flyer-close:hover {
-  background: rgba(220, 53, 69, 0.9);
-  transform: rotate(90deg) scale(1.1);
+.monthly-offer-close:hover,
+.monthly-offer-close:focus-visible {
+  color: var(--offer-amber);
+  opacity: 1;
+  outline: 2px solid var(--offer-amber);
+  outline-offset: 2px;
 }
 
-.flyer-image-wrapper {
-  width: 100%;
-  line-height: 0;
+.monthly-offer-brand {
+  align-items: center;
+  background: #fff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 12px;
+  min-height: 68px;
+  padding: 4px 8px;
+  width: 128px;
 }
 
-.flyer-image {
-  width: 100%;
-  height: auto;
-  display: block;
+.monthly-offer-brand img {
+  filter: drop-shadow(0 0 12px rgb(242 176 30 / 25%));
+  height: 68px;
   object-fit: contain;
+  width: 112px;
 }
 
-/* Responsive */
+.monthly-offer-greeting {
+  color: var(--offer-amber);
+  font: 600 15px/1.3 'Barlow Condensed', sans-serif;
+  letter-spacing: .34em;
+  margin: 0 0 4px;
+}
+
+.monthly-offer-month-wrap {
+  display: inline-block;
+  padding: 4px 18px;
+  position: relative;
+}
+
+.monthly-offer-month-wrap::before,
+.monthly-offer-month-wrap::after {
+  animation: monthly-offer-ping 2.8s ease-out 1s infinite;
+  border: 1px solid var(--offer-amber);
+  border-radius: 50%;
+  content: '';
+  height: 120px;
+  left: 50%;
+  margin: -60px;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  width: 120px;
+}
+
+.monthly-offer-month-wrap::after {
+  animation-delay: 2.2s;
+}
+
+@keyframes monthly-offer-ping {
+  0% { opacity: .7; transform: scale(.4); }
+  100% { opacity: 0; transform: scale(3.2, 1.6); }
+}
+
+.monthly-offer-month {
+  color: #fff;
+  font: 700 clamp(46px, 14vw, 78px)/1 'Barlow Condensed', sans-serif;
+  letter-spacing: .06em;
+  position: relative;
+  text-shadow: 0 2px 18px rgb(0 0 0 / 45%);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.monthly-offer-month > span:not(.monthly-offer-visually-hidden) {
+  animation: monthly-offer-character .7s cubic-bezier(.2, .8, .2, 1) forwards;
+  animation-delay: calc(.6s + var(--character-index) * 60ms);
+  display: inline-block;
+  filter: blur(8px);
+  opacity: 0;
+  transform: translateX(-30px) scaleX(1.4);
+}
+
+.monthly-offer-visually-hidden {
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@keyframes monthly-offer-character {
+  to { filter: blur(0); opacity: 1; transform: none; }
+}
+
+.monthly-offer-discount {
+  align-items: center;
+  animation: monthly-offer-beat 2.4s ease-in-out 1.6s infinite;
+  background: var(--offer-amber);
+  color: var(--offer-navy);
+  display: inline-flex;
+  gap: 12px;
+  margin: 14px 0 6px;
+  padding: 8px 22px;
+  transform: skewX(-8deg);
+}
+
+.monthly-offer-discount > * {
+  transform: skewX(8deg);
+}
+
+.monthly-offer-discount strong {
+  font: 700 46px/1 'Barlow Condensed', sans-serif;
+}
+
+.monthly-offer-discount span {
+  font: 600 14px/1.15 'Barlow Condensed', sans-serif;
+  letter-spacing: .14em;
+  text-align: left;
+}
+
+@keyframes monthly-offer-beat {
+  50% { box-shadow: 0 0 30px rgb(242 176 30 / 55%); }
+}
+
+.monthly-offer-message {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 8px auto 16px;
+  max-width: 40ch;
+  opacity: .82;
+}
+
+.monthly-offer-services {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.monthly-offer-services li {
+  animation: monthly-offer-service-in .5s ease forwards;
+  animation-delay: calc(1.2s + var(--service-index) * 90ms);
+  background: rgb(255 255 255 / 5%);
+  border-left: 3px solid var(--offer-amber);
+  font-size: 13.5px;
+  opacity: 0;
+  padding: 9px 10px;
+  text-align: left;
+  transform: translateX(-14px);
+}
+
+@keyframes monthly-offer-service-in {
+  to { opacity: 1; transform: none; }
+}
+
+.monthly-offer-actions {
+  animation: monthly-offer-service-in .6s ease 1.9s forwards;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0;
+}
+
+.monthly-offer-button {
+  background: var(--offer-amber);
+  color: var(--offer-navy);
+  display: block;
+  font: 700 16px/1.2 'Barlow Condensed', sans-serif;
+  letter-spacing: .12em;
+  padding: 14px 8px;
+  text-decoration: none;
+  transition: box-shadow .2s, transform .2s;
+}
+
+.monthly-offer-button--whatsapp {
+  background: #25d366;
+  color: #05301a;
+}
+
+.monthly-offer-button:hover,
+.monthly-offer-button:focus-visible {
+  box-shadow: 0 8px 20px rgb(0 0 0 / 45%);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.monthly-offer-phone {
+  font-size: 13px;
+  letter-spacing: .12em;
+  margin: 12px 0 0;
+  opacity: .7;
+}
+
+.monthly-offer-tagline {
+  font-size: 11px;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  margin: 6px 0 0;
+  opacity: .55;
+}
+
+.monthly-offer-confetti {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.monthly-offer-confetti i {
+  animation: monthly-offer-confetti-fall 3.5s linear var(--confetti-delay) forwards;
+  background: var(--confetti-color);
+  height: 12px;
+  left: var(--confetti-left);
+  position: absolute;
+  top: -14px;
+  width: 6px;
+}
+
+.monthly-offer-confetti i:nth-child(3n) {
+  --confetti-color: #f2b01e;
+}
+
+.monthly-offer-confetti i:nth-child(3n + 1) {
+  --confetti-color: #fff;
+}
+
+.monthly-offer-confetti i:nth-child(3n + 2) {
+  --confetti-color: #3f6fa8;
+}
+
+@keyframes monthly-offer-confetti-fall {
+  to { opacity: .2; transform: translateY(105vh) rotate(540deg); }
+}
+
 @media (max-width: 600px) {
-  .flyer-popup {
-    max-width: 90vw;
+  .monthly-offer-card {
+    max-height: calc(100dvh - 24px);
+    padding: 26px 18px 20px;
   }
 
-  .flyer-close {
-    width: 32px;
-    height: 32px;
-    top: 8px;
-    right: 8px;
-    font-size: 1rem;
+  .monthly-offer-brand img {
+    height: 58px;
+    width: 96px;
+  }
+
+  .monthly-offer-services li {
+    font-size: 12px;
+    padding: 8px;
   }
 }
 
-/* Print */
+@media (max-height: 700px) {
+  .monthly-offer-card {
+    padding-bottom: 16px;
+    padding-top: 22px;
+  }
+
+  .monthly-offer-brand {
+    margin-bottom: 7px;
+    min-height: 48px;
+    width: 104px;
+  }
+
+  .monthly-offer-brand img {
+    height: 46px;
+    width: 84px;
+  }
+
+  .monthly-offer-month {
+    font-size: clamp(40px, 12vw, 62px);
+  }
+
+  .monthly-offer-discount {
+    margin-top: 8px;
+  }
+
+  .monthly-offer-message {
+    margin-bottom: 12px;
+  }
+
+  .monthly-offer-services {
+    margin-bottom: 14px;
+  }
+
+  .monthly-offer-button {
+    padding-bottom: 11px;
+    padding-top: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .monthly-offer-card,
+  .monthly-offer-month > span:not(.monthly-offer-visually-hidden),
+  .monthly-offer-services li,
+  .monthly-offer-actions {
+    animation: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .monthly-offer-card::before,
+  .monthly-offer-month-wrap::before,
+  .monthly-offer-month-wrap::after,
+  .monthly-offer-discount {
+    animation: none !important;
+  }
+
+  .monthly-offer-confetti {
+    display: none;
+  }
+}
+
 @media print {
-  .flyer-overlay {
+  .monthly-offer-overlay {
     display: none;
   }
 }
