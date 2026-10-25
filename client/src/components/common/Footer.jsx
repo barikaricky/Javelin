@@ -34,8 +34,8 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: <FaTiktok />, url: 'https://www.tiktok.com/@javelin.associate?_r=1&_t=ZS-96u4qKSAMuv', name: 'TikTok' },
-    { icon: <FaInstagram />, url: 'https://www.instagram.com/javelinassociates?igsh=MW8xNGNha2Vma2tqdA==', name: 'Instagram' },
-    { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/company/javelin-associates-limited/', name: 'LinkedIn' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/javelinassociates/', name: 'Instagram' },
+    { icon: <FaLinkedinIn />, url: 'https://linkedin.com/company/javelin-associates-limited/', name: 'LinkedIn' },
     { icon: <FaWhatsapp />, url: 'https://wa.me/2348134233131', name: 'WhatsApp' }
   ];
 
@@ -111,7 +111,7 @@ const Footer = () => {
                 </div>
                 <div className="footer__contact-item">
                   <FaPhone className="footer__contact-icon" />
-                  <a href="tel:+2348012345678">08134233131 or 08103323437</a>
+                  <a href="tel:+2348134233131">08134233131</a>
                 </div>
                 <div className="footer__contact-item">
                   <FaEnvelope className="footer__contact-icon" />

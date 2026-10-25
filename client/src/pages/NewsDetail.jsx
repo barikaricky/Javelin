@@ -301,7 +301,7 @@ const NewsDetail = () => {
                   <div className="comment-notice">
                     <p>
                       <strong>Note:</strong> For immediate security concerns or consultations, 
-                      please call us directly at <strong>08103323437</strong> or <strong>09153542986</strong>
+                      please call us directly at <strong>08134233131</strong>
                     </p>
                   </div>
                 </div>
@@ -401,7 +401,7 @@ const NewsDetail = () => {
                 <p>Professional security solutions tailored to your needs in Port Harcourt and across Nigeria</p>
                 <div className="cta-buttons">
                   <Link to="/contact" className="btn btn-primary btn-block">Get Free Quote</Link>
-                  <a href="tel:+2348103323437" className="btn btn-outline btn-block">📞 Call Now</a>
+                  <a href="tel:+2348134233131" className="btn btn-outline btn-block">📞 Call Now</a>
                 </div>
               </div>
 

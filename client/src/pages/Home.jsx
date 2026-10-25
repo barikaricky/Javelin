@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   FaArrowRight,
+  FaBuilding,
   FaCalendarAlt,
   FaCheck,
+  FaCheckCircle,
+  FaCar,
   FaDog,
+  FaHome,
+  FaInstagram,
+  FaKey,
+  FaLinkedinIn,
   FaPhone,
   FaShieldAlt,
-  FaStar,
-  FaUserShield,
+  FaUsers,
+  FaUserSecret,
   FaVideo
 } from 'react-icons/fa';
 import SEO from '../components/common/SEO';
@@ -68,33 +75,63 @@ const slides = [
 const services = [
   {
     icon: FaShieldAlt,
-    title: 'Armed guards',
-    description: 'Licensed, vetted armed personnel for high-value sites, cash movement and high-risk locations.'
+    title: 'Corporate Security',
+    description: 'Protect offices, banks and commercial spaces with trained officers, visible deterrence and rapid response support.',
+    features: ['Uniformed security officers', 'Access control and visitor screening', '24/7 monitoring and incident response']
   },
   {
-    icon: FaUserShield,
-    title: 'Unarmed guards',
-    description: 'Disciplined, uniformed guards for offices, estates, schools, hospitals and retail premises.'
+    icon: FaHome,
+    title: 'Residential Security',
+    description: 'Keep homes, families and estates safe with dependable guard coverage, gate control and a reassuring presence.',
+    features: ['Residential guard coverage', 'Gatehouse and perimeter support', 'Visitor management and patrol reporting']
   },
   {
     icon: FaDog,
-    title: 'K-9 units',
-    description: 'Handler-led dog teams for patrol, perimeter defence and detection of intruders and prohibited items.'
+    title: 'K-9 Security',
+    description: 'Add trained canine teams to detection, high-security patrols and rapid intervention at sensitive locations.',
+    features: ['Handler-led operations', 'Detection and patrol support', 'Reinforcement for high-risk sites']
   },
   {
-    icon: FaVideo,
-    title: 'CCTV & surveillance',
-    description: 'Camera installation, remote monitoring and alarm integration for round-the-clock visibility.'
-  },
-  {
-    icon: FaStar,
-    title: 'Executive protection',
-    description: 'Discreet bodyguard and close-protection teams for executives, VIPs and families.'
+    icon: FaBuilding,
+    title: 'Industrial & Safety Security',
+    description: 'Safeguard factories, warehouses and industrial facilities with safety-focused planning and trained personnel.',
+    features: ['Perimeter and asset protection', 'Fire watch and safety patrols', 'Incident reporting and site supervision']
   },
   {
     icon: FaCalendarAlt,
-    title: 'Event security',
-    description: 'Crowd control, access management and VIP safety for corporate functions and public events.'
+    title: 'Event Security',
+    description: 'Keep events secure and well-managed with crowd control, access monitoring and coordinated incident response.',
+    features: ['Crowd and guest management', 'Entry screening and access support', 'VIP protection and response planning']
+  },
+  {
+    icon: FaCar,
+    title: 'Mobile Patrol & Escort Security',
+    description: 'Protect property and movements with scheduled patrols, vehicle escort and responsive support.',
+    features: ['Scheduled and random patrol checks', 'Vehicle escort and mobility support', 'Visible deterrence and incident response']
+  },
+  {
+    icon: FaUserSecret,
+    title: 'VIP & Executive Protection',
+    description: 'Provide discreet close protection for executives, dignitaries and high-profile guests.',
+    features: ['Close-protection officers', 'Route planning and threat awareness', 'Advance coordination and confidentiality']
+  },
+  {
+    icon: FaVideo,
+    title: 'CCTV Monitoring',
+    description: 'Improve real-time visibility of your premises with surveillance, motion alerts and professional support.',
+    features: ['HD camera installation and monitoring', 'Live and motion alerts', 'Remote observation and response coordination']
+  },
+  {
+    icon: FaKey,
+    title: 'Access Control Systems',
+    description: 'Strengthen entry points with biometric or card access and organised visitor management.',
+    features: ['Biometric and card-based access', 'Visitor registration and logging', 'CCTV and alarm integration']
+  },
+  {
+    icon: FaUsers,
+    title: 'Security Consulting',
+    description: 'Turn expert audits and risk assessments into practical recommendations to improve safety.',
+    features: ['Vulnerability and risk assessment', 'Security planning and policy review', 'Training and compliance support']
   }
 ];
 
@@ -271,14 +308,44 @@ const Home = () => {
               </p>
             </div>
             <div className="landing-services">
-              {services.map(({ icon: Icon, title, description }) => (
+              {services.map(({ icon: Icon, title, description, features }) => (
                 <article className="landing-card" key={title}>
                   <div className="landing-card__icon"><Icon aria-hidden="true" /></div>
                   <h3>{title}</h3>
                   <p>{description}</p>
+                  <ul className="landing-card__features">
+                    {features.map((feature) => (
+                      <li key={feature}><FaCheckCircle aria-hidden="true" />{feature}</li>
+                    ))}
+                  </ul>
+                  <Link
+                    className="landing-card__link"
+                    to="/book-meeting"
+                  >
+                    Request a quote <FaArrowRight aria-hidden="true" />
+                  </Link>
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="landing-quote" aria-labelledby="landing-quote-title">
+          <div className="landing-quote__grid" aria-hidden="true" />
+          <div className="landing-wrap landing-quote__content">
+            <p className="landing-eyebrow">Let’s plan your protection</p>
+            <h2 id="landing-quote-title">Your risks are unique.<br /><em>Your quote should be too.</em></h2>
+            <p>Tell us what you need to protect. Our team will help shape a practical security plan around your site, people and priorities.</p>
+            <div className="landing-quote__actions">
+              <Link className="landing-button landing-button--primary" to="/book-meeting">
+                Request a quote <FaArrowRight aria-hidden="true" />
+              </Link>
+              <a className="landing-button landing-button--outline" href="https://wa.me/2348134233131" target="_blank" rel="noopener noreferrer">
+                Chat with our team
+              </a>
+            </div>
+            <span className="landing-quote__orbit landing-quote__orbit--one" aria-hidden="true" />
+            <span className="landing-quote__orbit landing-quote__orbit--two" aria-hidden="true" />
           </div>
         </section>
 
@@ -356,8 +423,8 @@ const Home = () => {
               </Link>
             </div>
             <div className="landing-contact__details">
-              <a href="tel:+2348103323437"><FaPhone aria-hidden="true" /><span><small>Call us</small><strong>+234 810 332 3437</strong></span></a>
-              <a href="https://wa.me/2348103323437" rel="noopener noreferrer"><span className="landing-contact__whatsapp" aria-hidden="true">WA</span><span><small>WhatsApp</small><strong>Chat with our team</strong></span></a>
+              <a href="tel:+2348134233131"><FaPhone aria-hidden="true" /><span><small>Call us</small><strong>08134233131</strong></span></a>
+              <a href="https://wa.me/2348134233131" target="_blank" rel="noopener noreferrer"><span className="landing-contact__whatsapp" aria-hidden="true">WA</span><span><small>WhatsApp</small><strong>Chat with our team</strong></span></a>
               <div><span className="landing-contact__pin" aria-hidden="true">PH</span><span><small>Location</small><strong>Port Harcourt, Rivers State</strong></span></div>
             </div>
           </div>
@@ -368,6 +435,14 @@ const Home = () => {
         <div className="landing-wrap">
           <span>© 2026 Javelin Associates Ltd. All rights reserved.</span>
           <span>Professional security services · Rivers State, Nigeria</span>
+          <nav className="landing-footer__social" aria-label="Social media">
+            <a href="https://www.instagram.com/javelinassociates/" target="_blank" rel="noopener noreferrer">
+              <FaInstagram aria-hidden="true" /> Instagram
+            </a>
+            <a href="https://linkedin.com/company/javelin-associates-limited/" target="_blank" rel="noopener noreferrer">
+              <FaLinkedinIn aria-hidden="true" /> LinkedIn
+            </a>
+          </nav>
         </div>
       </footer>
     </div>

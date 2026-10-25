@@ -236,7 +236,7 @@ const Recruitment = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      placeholder="08134233131 or 08103323437"
+                      placeholder="08134233131"
                     />
                   </div>
 

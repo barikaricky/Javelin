@@ -18,8 +18,8 @@ const ContactInfo = () => {
     {
       icon: <FaPhone />,
       title: 'Phone Numbers',
-      content: '08103323437\n09153542986',
-      link: 'tel:08103323437'
+      content: '08134233131',
+      link: 'tel:+2348134233131'
     },
     {
       icon: <FaEnvelope />,

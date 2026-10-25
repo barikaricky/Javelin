@@ -48,9 +48,9 @@ const Header = () => {
         <div className="container">
           <div className="header__topbar-content">
             <div className="header__contact">
-              <a href="tel:+2348012345678" className="header__contact-item">
+              <a href="tel:+2348134233131" className="header__contact-item">
                 <FaPhone className="header__icon" />
-                <span className="hide-mobile">08134233131 or 08103323437</span>
+                <span className="hide-mobile">08134233131</span>
               </a>
               <a href="mailto:info@javelinassociates.com" className="header__contact-item">
                 <FaEnvelope className="header__icon" />
@@ -128,7 +128,7 @@ const Header = () => {
             ))}
           </ul>
           <div className="header__mobile-contact">
-            <a href="tel:+2348012345678" className="btn btn-secondary btn-block">
+            <a href="tel:+2348134233131" className="btn btn-secondary btn-block">
               <FaPhone /> Call Us
             </a>
             <Link to="/recruitment" className="btn btn-primary btn-block" onClick={closeMenu}>

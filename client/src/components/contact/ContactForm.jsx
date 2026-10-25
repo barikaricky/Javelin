@@ -98,7 +98,7 @@ const ContactForm = () => {
               className="form-input"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="08134233131 or 08103323437"
+              placeholder="08134233131"
             />
           </div>
 

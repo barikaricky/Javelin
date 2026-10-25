@@ -56,7 +56,7 @@ const faqDatabase = [
   },
   {
     question: 'How do I get a quote?',
-    answer: '[GET QUOTE] Getting a quote is easy! Call us at 08103323437, email info@javelinassociates.com, or visit our Book A Meeting page to schedule a free consultation. We will assess your needs and provide a detailed, customized quote within 24 hours.',
+    answer: '[GET QUOTE] Getting a quote is easy! Call us at 08134233131, email info@javelinassociates.com, or visit our Book A Meeting page to schedule a free consultation. We will assess your needs and provide a detailed, customized quote within 24 hours.',
     keywords: ['quote', 'estimate', 'price', 'cost', 'proposal']
   },
   {
@@ -66,7 +66,7 @@ const faqDatabase = [
   },
   {
     question: 'What is your response time for emergencies?',
-    answer: '[EMERGENCY RESPONSE] For emergencies, call 08103323437 immediately! Our control room operates 24/7. We can deploy rapid response teams within 30-60 minutes in Port Harcourt. For existing clients with guards on-site, response is immediate.',
+    answer: '[EMERGENCY RESPONSE] For emergencies, call 08134233131 immediately! Our control room operates 24/7. We can deploy rapid response teams within 30-60 minutes in Port Harcourt. For existing clients with guards on-site, response is immediate.',
     keywords: ['emergency', 'urgent', 'crisis', 'response time', 'immediate']
   },
   {
@@ -93,7 +93,7 @@ const knowledgeBase = [
   {
     id: 'contact',
     title: 'Contact Information',
-    answer: 'You can reach Javelin Associates at: 📍 No. 85 Aker Road, opposite Renew Empire Iwofe, Port Harcourt, Rivers State, Nigeria. 📞 Call us: 08103323437 or 09153542986. 📧 Email: info@javelinassociates.com or hr@javelinassociates.com. We provide 24/7 emergency response!',
+    answer: 'You can reach Javelin Associates at: 📍 No. 85 Aker Road, opposite Renew Empire Iwofe, Port Harcourt, Rivers State, Nigeria. 📞 Call us: 08134233131. 📧 Email: info@javelinassociates.com or hr@javelinassociates.com. We provide 24/7 emergency response!',
     keywords: ['contact', 'email', 'phone', 'call', 'number', 'reach', 'address', 'location', 'where', 'office', 'visit', 'headquarters', 'port harcourt', 'rivers', 'nigeria', 'aker road', 'iwofe'],
     category: 'Contact'
   },
@@ -121,7 +121,7 @@ const knowledgeBase = [
   {
     id: 'pricing',
     title: 'Security Service Pricing',
-    answer: 'Our pricing varies based on service type, location, duration, and specific requirements. Private Guard Services, Corporate Security, Residential Protection, and Event Security all have customized rates. Contact us for a FREE personalized quote at 08103323437 or visit our "Book A Meeting" page. We offer competitive rates with no hidden fees!',
+    answer: 'Our pricing varies based on service type, location, duration, and specific requirements. Private Guard Services, Corporate Security, Residential Protection, and Event Security all have customized rates. Contact us for a FREE personalized quote at 08134233131 or visit our "Book A Meeting" page. We offer competitive rates with no hidden fees!',
     keywords: ['price', 'pricing', 'cost', 'fee', 'rate', 'charge', 'payment', 'how much', 'expensive', 'cheap', 'affordable', 'quote', 'estimate'],
     category: 'Pricing'
   },
@@ -142,7 +142,7 @@ const knowledgeBase = [
   {
     id: 'emergency',
     title: '24/7 Emergency Response',
-    answer: '🚨 For immediate security emergencies, call us NOW at 08103323437 or 09153542986. We provide 24/7 emergency response services with rapid deployment teams ready to assist. Our control room operates round-the-clock to handle all security incidents.',
+    answer: '🚨 For immediate security emergencies, call us NOW at 08134233131. We provide 24/7 emergency response services with rapid deployment teams ready to assist. Our control room operates round-the-clock to handle all security incidents.',
     keywords: ['emergency', 'urgent', 'help', 'now', 'immediate', 'quick', '24/7', 'alarm', 'incident', 'crisis', 'threat', 'danger', 'sos'],
     category: 'Emergency'
   },
@@ -163,7 +163,7 @@ const knowledgeBase = [
   {
     id: 'hours',
     title: 'Office Hours',
-    answer: 'Our office hours are: Monday - Friday: 8:00 AM - 6:00 PM, Saturday: 9:00 AM - 2:00 PM, Sunday: Closed for routine matters. However, our SECURITY SERVICES and emergency response are available 24/7/365! Call 08103323437 anytime for security assistance.',
+    answer: 'Our office hours are: Monday - Friday: 8:00 AM - 6:00 PM, Saturday: 9:00 AM - 2:00 PM, Sunday: Closed for routine matters. However, our SECURITY SERVICES and emergency response are available 24/7/365! Call 08134233131 anytime for security assistance.',
     keywords: ['hours', 'time', 'open', 'closed', 'when', 'schedule', 'availability', 'available', 'timing'],
     category: 'Hours'
   },
@@ -480,7 +480,7 @@ const AssistantWidget = () => {
 
       // Handle emergency
       if (intent === 'emergency') {
-        return '🚨 FOR IMMEDIATE SECURITY EMERGENCIES:\n\n📞 Call us NOW: 08103323437 or 09153542986\n\nWe provide 24/7 emergency response with rapid deployment teams ready to assist! Our control room operates round-the-clock.\n\n⚡ We can have personnel on-site within 4-6 hours in Port Harcourt area!';
+        return '🚨 FOR IMMEDIATE SECURITY EMERGENCIES:\n\n📞 Call us NOW: 08134233131\n\nWe provide 24/7 emergency response with rapid deployment teams ready to assist! Our control room operates round-the-clock.\n\n⚡ We can have personnel on-site within 4-6 hours in Port Harcourt area!';
       }
 
       // Sentiment-based responses
@@ -491,7 +491,7 @@ const AssistantWidget = () => {
       }
 
       if (sentiment === 'negative') {
-        return '😔 I\'m sorry if you\'re experiencing any issues. Let me connect you with the right help:\n\n📞 Call us directly: 08103323437\n📧 Email: info@javelinassociates.com\n\nOur team will address your concerns immediately. Can you tell me more about what you need?';
+        return '😔 I\'m sorry if you\'re experiencing any issues. Let me connect you with the right help:\n\n📞 Call us directly: 08134233131\n📧 Email: info@javelinassociates.com\n\nOur team will address your concerns immediately. Can you tell me more about what you need?';
       }
 
       // Return knowledge base match if found
@@ -522,7 +522,7 @@ const AssistantWidget = () => {
       const suggestions = {
         'pricing': '💰 I noticed you\'re asking about pricing. We offer competitive rates for all security services! For accurate quotes, I can help you:\n• Schedule a FREE consultation\n• Get basic price ranges\n• Learn about our discount packages\n\nWhat would you prefer?',
         'services': '🛡️ Looking for security services? We offer:\n• Armed/Unarmed Guards\n• Corporate Security\n• Residential Protection\n• Event Security\n• CCTV & Technology\n• Mobile Patrols\n• K-9 Units\n\nWhich interests you most?',
-        'contact': '📞 Contact Information:\n📍 No. 85 Aker Road, Iwofe, Port Harcourt\n📞 08103323437 | 09153542986\n📧 info@javelinassociates.com\n\n🕐 Office: Mon-Fri 8AM-6PM, Sat 9AM-2PM\n⚡ Security Services: 24/7/365!',
+        'contact': '📞 Contact Information:\n📍 No. 85 Aker Road, Iwofe, Port Harcourt\n📞 08134233131\n📧 info@javelinassociates.com\n\n🕐 Office: Mon-Fri 8AM-6PM, Sat 9AM-2PM\n⚡ Security Services: 24/7/365!',
         'career': '💼 Join Our Team!\n\nWe\'re hiring for:\n• Security Guards\n• Supervisors\n• CCTV Operators\n• Mobile Patrol Officers\n\n✅ Competitive Salary\n✅ Professional Training\n✅ Career Growth\n\nVisit our Recruitment page to apply!',
         'general': '🤔 I\'m not quite sure about that specific question, but I can definitely help you with:\n\n🛡️ Security Services & Solutions\n💼 Career Opportunities & Recruitment\n💰 Pricing & Custom Quotes\n📞 Contact Information & Location\n📍 Coverage Areas in Rivers State\n⚡ Emergency Services (24/7)\n\nTry asking about any of these topics, or use the quick prompts below!'
       };
