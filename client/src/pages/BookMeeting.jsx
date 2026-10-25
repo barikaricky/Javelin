@@ -204,8 +204,8 @@ const BookMeeting = () => {
             <h2>Final Details</h2>
             <p>Help us prepare for your consultation.</p>
             <div className="form-group">
-              <label htmlFor="serviceInterest">Service You're Interested In</label>
-              <select id="serviceInterest" name="serviceInterest" value={formData.serviceInterest} onChange={handleChange}>
+              <label htmlFor="serviceInterest">Service You're Interested In <span className="required">*</span></label>
+              <select id="serviceInterest" name="serviceInterest" value={formData.serviceInterest} onChange={handleChange} required>
                 <option value="">Select a service</option>
                 {services.map(service => <option key={service.value} value={service.value}>{service.label}</option>)}
               </select>
@@ -229,6 +229,8 @@ const BookMeeting = () => {
         return formData.meetingType;
       case 3:
         return formData.preferredDate && formData.preferredTime;
+      case 4:
+        return formData.serviceInterest;
       default:
         return true;
     }

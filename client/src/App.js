@@ -40,6 +40,7 @@ import {
 const Layout = ({ children }) => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+  const isHomeRoute = location.pathname === '/';
 
   if (isAdminRoute) {
     return children;
@@ -47,9 +48,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header />
-      <main>{children}</main>
-      <Footer />
+      {!isHomeRoute && <Header />}
+      <main className={isHomeRoute ? 'home-main' : undefined}>{children}</main>
+      {!isHomeRoute && <Footer />}
       <AssistantWidget />
       <MonthlyFlyer />
       <CookieConsent />
